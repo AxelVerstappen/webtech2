@@ -21,11 +21,25 @@ body
 	border-radius: 20px;
 	padding: 20px;
 	overflow: hidden;
+	-webkit-animation: flipInX 0.5s;
+	-webkit-animation-fill-mode: forwards; 
+	-webkit-transform-origin: center center;	
 }
 
 #users
 {
-		
+	-webkit-animation: flipInY 1.5s;
+	-webkit-animation-fill-mode: forwards; 
+	-webkit-transform-origin: left bottom;	
+}
+
+h1,
+h2
+{
+	margin-left: -300px;
+	-webkit-animation: floatIn 1.5s;
+	-webkit-animation-fill-mode: forwards; 
+	-webkit-transform-origin: left bottom;	
 }
 
 h1
@@ -42,14 +56,41 @@ h2
 img
 {
 	background-color: #fff;
-	width: 220px;
-	margin-right: 5px;
-	margin-left: 5px;
+	width: 210px;
+	margin-left: 20px;
 	margin-top: 20px;
 	border-radius: 20px;	
 }
 
 img:hover
 {
-	-webkit-transform: scale(1.1);	
+	-webkit-animation: scale 0.5s;	
+	-webkit-animation-fill-mode: forwards;
 }
+
+@-webkit-keyframes scale
+{
+100%  {-webkit-transform: scale(1.1)}
+}
+
+@-webkit-keyframes flipInY
+{
+0%  {-webkit-transform: rotateY(90deg)}
+40%  {-webkit-transform: rotateY(-10deg)}
+70%  {-webkit-transform: rotateY(10deg)}
+100%  {-webkit-transform: rotateY(0deg)}
+}
+
+@-webkit-keyframes flipInX
+{
+0%  {-webkit-transform: rotateX(90deg)}
+40%  {-webkit-transform: rotateX(-10deg)}
+70%  {-webkit-transform: rotateX(10deg)}
+100%  {-webkit-transform: rotateX(0deg)}
+}
+
+@-webkit-keyframes floatIn
+{
+100%  {-webkit-transform: translateX(300px)}
+}
+
