@@ -5,11 +5,24 @@
 <title>Opdracht 1</title>
 <link href="reset.css" rel="stylesheet" type="text/css">
 <link href="screen.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#geel').click(function(){
+			$('#geel').addClass("m1"),
+			$('#groen').addClass("m2"),
+			$('#rood').addClass("m3")
+		}
+		);
+	});
+</script>
 </head>
 
 <body>
-<div id="groen" class="bol"> </div>
-<div id="rood" class="bol"> </div>
-<div id="geel" class="bol"> </div>
+<div id="groen"> </div>
+<div id="rood"> </div>
+<div id="geel"> </div>
 </body>
 </html>
