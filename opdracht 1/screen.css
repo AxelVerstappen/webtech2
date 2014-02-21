@@ -1,0 +1,23 @@
+@charset "utf-8";
+.bol
+{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;	
+	position: absolute;
+}
+
+#groen
+{
+	background-color: green;	
+}
+
+#geel
+{
+	background-color: yellow;	
+}
+
+#rood
+{
+	background-color: red;	
+}
