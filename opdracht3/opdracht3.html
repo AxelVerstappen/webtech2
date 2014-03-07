@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Javascript oefening1</title>
+
+<link href="reset.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<div>
+    
+        <h1>IMDo App</h1>
+        <ul>
+            <li id="todo-item1">Learn about GIT</li>
+            <li id="todo-item2" class="todo">Experiment with CSS3 animations</li>
+            <li id="todo-item3" class="todo">Become a Javascript ninja</li>
+        </ul>
+    
+    </div>
+    
+    <script>
+		//FRAMEWORK
+		var IMDelement = function(element)
+		{
+			this.element = element;
+			this.isArray = 	(element.length > 1) ? true : false;
+		}
+		
+		IMDelement.prototype.addClass = function(p_class)
+		{
+			if(this.isArray)
+			{
+				for(var i=0, l=this.element.length; i<l; i++)
+				{
+					this.element[i].className = p_class;
+				}
+			}
+			else{
+				this.element.className = p_class;	
+			}
+		}
+		
+		IMDelement.prototype.color = function(p_color)
+		{
+			if(this.isArray)
+			{
+				for(var i=0, l=this.element.length; i<l; i++)
+				{
+					this.element[i].style['color'] = p_color;
+				}
+			}
+			else{
+				this.element.style['color'] = p_color;		
+			}
+		}
+	
+		var $ = function(p_element)
+		{
+			var firstCharacter = p_element.charAt(0);
+			var result;
+			
+			switch(firstCharacter)
+			{
+				case "#":
+					//de id zonder de hashtag opvragen dus => substring beginnen vanaf 2de character
+					var idToSelect = p_element.substring(1, p_element.length);
+					var element = document.getElementById(idToSelect);
+					var result = new IMDelement(element);
+				break;
+				
+				case ".":
+					var classToSelect = p_element.substring(1, p_element.length);
+					var elements = document.getElementsByClassName(classToSelect);
+					var result = new IMDelement(elements);
+				break;	
+				
+				default:
+					var elements = document.getElementsByTagName(p_element);
+					var result = new IMDelement(elements);
+				break;	
+			}
+			
+			return result;
+		}
+		
+		//$("#todo-item1").color("yellow");
+		//$('.todo').color("red");
+		$('li').color("red");
+		$('li').addClass('done');
+		
+		//werkt maar wordt moeilijk onderhoudbaar
+		/*function markAsDone(elementid, important)
+		{
+			var item = document.getElementById(elementid);
+			item.style.color = "#AAA";
+			item.style.textDecoration = "line-through";
+			
+			if(important === true){
+				item.style.color = "red";	
+			}
+		}
+		
+		markAsDone("todo-item1");
+		markAsDone("todo-item2", true);
+		markAsDone("todo-item3");*/
+	</script>
+</body>
+</html>
