@@ -3,8 +3,36 @@
 <head>
 <meta charset="utf-8">
 <title>Untitled Document</title>
+<script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
 
-<body>
+<body onload="getLocation()">
+<h1>Temperatuur</h1>
+	<script>
+    function getLocation()
+      {
+      if (navigator.geolocation)
+        {
+        navigator.geolocation.getCurrentPosition(showPosition);
+        }
+      else{alert("Geolocation is not supported by this browser.");}
+      }
+    function showPosition(position)
+      {	
+		$.ajax({
+		  url: "https://api.forecast.io/forecast/e05e552399a601ca2b25c8092be9198e/"+position.coords.latitude+","+position.coords.longitude,
+		   dataType: 'jsonp',
+		   success: function() { console.log("Success"); },
+    error: function() { console.log('Failed!'); }
+		})
+		.done(function(data){
+			console.log(data);
+		});
+      }
+	  
+	  
+		
+    </script>
 </body>
 </html>
