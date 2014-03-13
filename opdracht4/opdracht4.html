@@ -19,20 +19,24 @@
       else{alert("Geolocation is not supported by this browser.");}
       }
     function showPosition(position)
-      {	
-		$.ajax({
-		  url: "https://api.forecast.io/forecast/e05e552399a601ca2b25c8092be9198e/"+position.coords.latitude+","+position.coords.longitude,
-		   dataType: 'jsonp',
-		   success: function() { console.log("Success"); },
-    error: function() { console.log('Failed!'); }
-		})
-		.done(function(data){
-			console.log(data);
-		});
+    {
+		if(typeof(localData)==undefined){
+			$.ajax({
+			url: "https://api.forecast.io/forecast/e05e552399a601ca2b25c8092be9198e/"+position.coords.latitude+","+position.coords.longitude,
+			dataType: 'jsonp'
+			})
+			.done(function(data){
+				var dataToStore = JSON.stringify(data);
+				localStorage.setItem('someData', dataToStore);
+				var localData = JSON.parse(localStorage.getItem('someData'));
+				console.log(localData, "Nieuwe data");
+			});
+		}
+		else{
+			var localData = JSON.parse(localStorage.getItem('someData'));	
+			console.log(localData, "Oude data");
+		}
       }
-	  
-	  
-		
     </script>
 </body>
 </html>
