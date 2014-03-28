@@ -10,6 +10,11 @@ var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
+//db vars
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/timder');
+
 //faye server vars
 var bayeux = new faye.NodeAdapter({
   mount:    '/faye',
@@ -19,6 +24,7 @@ var app = express();
 var server = http.createServer(app);
 bayeux.attach(server);
 
+//sessions code
 
 
 // all environments
@@ -40,6 +46,11 @@ if ('development' == app.get('env')) {
 app.get('/scoreboard', routes.scoreboard);
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/userlist', routes.userlist(db));
+app.get('/newuser', routes.newuser);
+
+//postpages
+app.post('/adduser', routes.adduser(db));
 
 app.configure(function() {
     app.use(express.bodyParser());

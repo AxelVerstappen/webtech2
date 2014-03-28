@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1= title
+    form#formAddUser(name="adduser",method="post",action="/adduser")
+        input#inputFirstName(type="text", placeholder="Voornaam", name="firstname")
+        input#inputLastName(type="text", placeholder="Achternaam", name="lastname")
+        input#inputUserEmail(type="text", placeholder="Email", name="useremail")
+        input#inputPassword(type="password", placeholder="Wachtwoord", name="password")
+        button#btnSubmit(type="submit") Submit

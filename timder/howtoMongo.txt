@@ -1,0 +1,68 @@
+- npm install 							//installeert alle modules, inclusief mongodb
+- run mongod.exe --dbpath C:\xampp\htdocs\webtech2\timder\data	//database server opstarten
+- run mongo.exe 						//database client opstarten
+- use timder 							//gebruik (of maak aan) de timder databank
+
+ Tabel aanmaken:
+  - db.tblNaam.insert(			//maakt tabel aan en insert de meegegeven waarden
+	user_id: "abc123", 		//als id niet gemaakt wordt, wordt deze automatisch aangemaakt
+    	age: 55,			//velden zoals age, status worden aangemaakt wanneer er iets wordt geinstert
+    	status: "A"
+    }) 					
+  - db.createCollection(tblNaam) 	//maakt enkel tabel aan
+
+ Tabel aanpassen
+  - db.tblNaam.update( 
+	{ user_id: "abc123" },
+        { $set: {
+                 quantity: 500,
+                 instock: true
+                }}
+        )				//past de tabel tblNaam aan en voegt een veld quantity = 500 
+					en instock = true in waar user_id = abc123
+  - db.tblNaam.update( 
+	{ user_id: "abc123" },
+        { $unset: {
+                 quantity: 500,
+                 instock: true
+                }}
+        )				//past de tabel tblNaam aan en verwijdert een veld quantity = 500 
+					en instock = true in waar user_id = abc123
+
+ Tabel verwijderen
+  - db.tblNaam.drop()			//verwijder een tabel uit de database
+
+ Record selecteren
+  - db.tblNaam.find(
+    	{ status: "A" },
+    	{ user_id: 1, status: 1, _id: 0 }
+    )					//selecteer user_id en status uit tblNaam waar status = A
+   
+    Termen
+     - $gt = groter dan		$gte = groter dan of gelijk aan
+     - $lt = kleiner dan	$lte = kleiner dan of gelijk aan
+     - .sort({ user_id: -1 }) = ORDER BY user_id DESC //1 betekent ASC
+     - .limit(1) = LIMIT 1
+
+ Record verwijderen
+  - db.tblNaam.remove( { status: "D" } )//verwijder uit tabel tblNaam waar status = D
+
+ Data innestelen (verdere tabellen overbodig maken)
+  - db.tblNaam.insert({
+   	_id: "joe",
+  	name: "Joe Bookreader",
+   	addresses: [
+                {
+                  street: "123 Fake Street",
+                  city: "Faketon",
+                  state: "MA",
+                  zip: 12345
+                },
+                {
+                  street: "1 Some Other Street",
+                  city: "Boston",
+                  state: "MA",
+                  zip: 12345
+                }
+        ]
+   }
