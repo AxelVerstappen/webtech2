@@ -3,6 +3,8 @@
  * GET home page.
  */
 
+var userEmail = "";
+
 exports.index = function(req, res){
   res.render('index', { title: 'Express' });
 };
@@ -28,14 +30,17 @@ exports.newuser = function(req, res){
 
 exports.adduser = function(db) {
     return function(req, res) {
-
-        // Get our form values. These rely on the "name" attributes
+        // Form values eruit halen en in een variabele steken
         var firstName = req.body.firstname;
 		var lastName = req.body.lastname;
         var email = req.body.useremail;
 		var password = req.body.password;
+		var work = req.body.work;
+		var workphoto1 = req.body.workphoto1;
+		var workphoto2 = req.body.workphoto2;
+		var workphoto3 = req.body.workphoto3;
 
-        // Set our collection
+        // Collection aanmaken
         var collection = db.get('usercollection');
 
         // Submit to the DB
@@ -43,16 +48,22 @@ exports.adduser = function(db) {
             "firstname" : firstName,
 			"lastname" : lastName,
             "email" : email,
-			"password" : password
+			"password" : password,
+			"work" : work,
+            "workphotos" : [
+				{"photo": workphoto1},
+				{"photo": workphoto2},
+				{"photo": workphoto3}
+			]
         }, function (err, doc) {
             if (err) {
-                // If it failed, return error
+                // Failed -> error boodschap geven
                 res.send("There was a problem adding the information to the database.");
             }
             else {
-                // If it worked, set the header so the address bar doesn't still say /adduser
+                // Header url naar /userlist aanpassen als het succesvol is.
                 res.location("userlist");
-                // And forward to success page
+                // En naar de succes pagina sturen.
                 res.redirect("userlist");
             }
         });

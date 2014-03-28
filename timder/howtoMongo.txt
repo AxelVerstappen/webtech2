@@ -4,7 +4,7 @@
 - use timder 							//gebruik (of maak aan) de timder databank
 
  Tabel aanmaken:
-  - db.tblNaam.insert(			//maakt tabel aan en insert de meegegeven waarden
+  - db.tblNaam.insert({			//maakt tabel aan en insert de meegegeven waarden
 	user_id: "abc123", 		//als id niet gemaakt wordt, wordt deze automatisch aangemaakt
     	age: 55,			//velden zoals age, status worden aangemaakt wanneer er iets wordt geinstert
     	status: "A"

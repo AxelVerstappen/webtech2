@@ -7,3 +7,7 @@ block content
         each user, i in userlist
             li
                 a(href="/newuser/")= user.firstname + " " + user.lastname
+                p= user.work
+                img(src=user.workphotos[0].photo)
+                img(src=user.workphotos[1].photo)
+                img(src=user.workphotos[2].photo)
