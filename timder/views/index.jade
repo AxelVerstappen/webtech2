@@ -11,8 +11,6 @@ block content
   input(type='file', id='image')
   input(type='button', value='Chat', id='fire')
   
-  script(src='/faye/client.js')
-  
   script.
     var client = new Faye.Client('/faye',{
      timeout: 20

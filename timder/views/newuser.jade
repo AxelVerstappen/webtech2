@@ -3,14 +3,27 @@ extends layout
 block content
     h1= title
     form#formAddUser(name="adduser",method="post",action="/adduser")
+      div#accountDetails
+        label(for="firstname")="Voornaam: "
         input#inputFirstName(type="text", placeholder="Voornaam", name="firstname")
+
+        label(for="lastname")="Achternaam: "
         input#inputLastName(type="text", placeholder="Achternaam", name="lastname")
+        br
+
+        label(for="useremail")="Email: "
         input#inputUserEmail(type="text", placeholder="Email", name="useremail")
+
+        label(for="password")="Paswoord: "
         input#inputPassword(type="password", placeholder="Wachtwoord", name="password")
+        br
         input#volgende(type="button", value="Volgende stap", name="volgende")
 
+      div#accountWork
         textarea#inputWork(type="text", placeholder="Type about yourself", name="work")
+        br
         input.inputWorkPhoto(type="text", placeholder="Photo 1 url", name="workphoto1")
         input.inputWorkPhoto(type="text", placeholder="Photo 2 url", name="workphoto2")
         input.inputWorkPhoto(type="text", placeholder="Photo 3 url", name="workphoto3")
+        br
         button#btnSubmit(type="submit") Submit

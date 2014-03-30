@@ -1,6 +1,6 @@
 - npm install 							//installeert alle modules, inclusief mongodb
-- run mongod.exe --dbpath C:\xampp\htdocs\webtech2\timder\data	//database server opstarten
-- run mongo.exe 						//database client opstarten
+- mongod.exe --dbpath C:\xampp\htdocs\webtech2\timder\data\db	//database server opstarten
+- mongo.exe 							//database client opstarten
 - use timder 							//gebruik (of maak aan) de timder databank
 
  Tabel aanmaken:

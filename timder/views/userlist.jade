@@ -1,13 +1,28 @@
 extends layout
 
 block content
-    h1.
-        User List
-    ul
-        each user, i in userlist
-            li
-                a(href="/newuser/")= user.firstname + " " + user.lastname
-                p= user.work
-                img(src=user.workphotos[0].photo)
-                img(src=user.workphotos[1].photo)
-                img(src=user.workphotos[2].photo)
+  h1.
+   User List
+  ul
+   each user, i in userlist
+    li.listitems
+     a(href="")= user.firstname + " " + user.lastname
+     p= user.work
+     img(src=user.workphotos[0].photo)
+     img(src=user.workphotos[1].photo)
+     img(src=user.workphotos[2].photo)
+     input.test(type="button", value="testvote")
+
+  script.
+    var client = new Faye.Client('/faye',{
+     timeout: 20
+    });
+
+    $(".test").click(function() {
+     var voteName = $(this).parent().find('a');
+
+     client.publish('/channel', {
+      text: voteName.text()
+     });
+     return false;
+    });

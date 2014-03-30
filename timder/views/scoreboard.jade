@@ -3,4 +3,14 @@ extends layout
 block content
   h1= title
   a(href="http://localhost:3000/") back
+  div#messages
+
+  script.
+    var client = new Faye.Client('/faye',{
+     timeout: 20
+    });
+
+    client.subscribe('/channel', function(message) {
+     $('#messages').append('<p>' + message.text + '</p>');
+    });
   
