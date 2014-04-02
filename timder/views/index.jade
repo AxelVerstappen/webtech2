@@ -3,34 +3,26 @@ extends layout
 block content
 
   h1= title
-  p Welcome to #{title}
   
-  h1 Chat Client
-  div(id="messages")
-  textarea(rows="2", cols="35", id="chat")
-  input(type='file', id='image')
-  input(type='button', value='Chat', id='fire')
-  
-  script.
-    var client = new Faye.Client('/faye',{
-     timeout: 20
-    });
-
-    client.subscribe('/channel', function(message) {
-     $('#messages').append('<p>' + message.text + '</p>');
-     $('#messages').append('<img src="' + message.image + '"/>');
-    });
-  
-    var $chat = $('#chat');
-    var $image = $('#image');
-    $('#fire').click(function() {
-
-     client.publish('/channel', {
-      text: $chat.val(),
-      image: $image.val()
+  form#formCompanyName(name="companyuser",method="post", action="/companyuser")
+   label(for="companyname")="Wie bent u?: "
+   input#inputCompanyName(type="text", placeholder="Naam", name="companyname")
+   
+   br
+   button#btnSubmit(type="submit") Start the selection!
+   
+   script.
+    $( document ).ready(function() {
+     var client = new Faye.Client('/faye',{
+      timeout: 20
      });
-    
-     $chat.val('');
-     $image.val('');
-     return false;
+     
+     $("#formCompanyName").click(function() {
+      var inputCompanyName = $("#inputCompanyName");
+
+      client.publish('/channel2', {
+       header: inputCompanyName.val()
+      });
+     });
     });
+

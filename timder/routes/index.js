@@ -3,7 +3,7 @@
  * GET home page.
  */
 
-var userEmail = "";
+var companyname = "";
 
 exports.index = function(req, res){
   res.render('index', { title: 'Express' });
@@ -15,12 +15,20 @@ exports.scoreboard = function(req, res){
 
 exports.userlist = function(db) {
     return function(req, res) {
-        var collection = db.get('usercollection');
-        collection.find({},{},function(e,docs){
-            res.render('userlist', {
-                "userlist" : docs
-            });
-        });
+		if(companyname != ""){
+			var collection = db.get('usercollection');
+			collection.find({},{},function(e,docs){
+				res.render('userlist', {
+					"userlist" : docs, 
+					"companyname": companyname
+				});
+			});
+		}
+		else
+		{
+			res.location("/");
+			res.redirect("/");
+		}
     };
 };
 
@@ -62,11 +70,19 @@ exports.adduser = function(db) {
             }
             else {
                 // Header url naar /userlist aanpassen als het succesvol is.
-                res.location("userlist");
+                res.location("newuser");
                 // En naar de succes pagina sturen.
-                res.redirect("userlist");
+                res.redirect("newuser");
             }
         });
 
     }
 }
+
+exports.companyuser = function(req, res){
+	var submittedName = req.body.companyname;
+  	companyname = submittedName;
+	
+	res.location("userlist");
+	res.redirect("userlist");
+};

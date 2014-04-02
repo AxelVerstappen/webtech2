@@ -1,8 +1,7 @@
 extends layout
 
 block content
-  h1.
-   User List
+  h1=companyname
   ul
    each user, i in userlist
     li.listitems
@@ -11,18 +10,35 @@ block content
      img(src=user.workphotos[0].photo)
      img(src=user.workphotos[1].photo)
      img(src=user.workphotos[2].photo)
-     input.test(type="button", value="testvote")
+     input(class="likeBtn likeDislikeBtns", type="button", value="Like")
+     input(class="dislikeBtn likeDislikeBtns", type="button", value="Dislike")
 
   script.
+   $( document ).ready(function() {
     var client = new Faye.Client('/faye',{
      timeout: 20
     });
 
-    $(".test").click(function() {
+    $(".likeBtn").click(function(e) {
      var voteName = $(this).parent().find('a');
 
      client.publish('/channel', {
       text: voteName.text()
      });
-     return false;
+     e.preventDefault();
     });
+    
+    $(".likeDislikeBtns").click(function(e){
+     var parent = $(this).parent();
+     
+     parent.fadeOut("slow", function(){
+        parent.attr('class', 'invisible');
+        var checklistitems = document.getElementsByClassName('listitems');
+        if(checklistitems.length == 0)
+        {
+         alert('Gedaan');
+        }
+     });
+     e.preventDefault();
+    });
+   });

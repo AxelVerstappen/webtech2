@@ -6,11 +6,17 @@ block content
   div#messages
 
   script.
+   $( document ).ready(function() {
     var client = new Faye.Client('/faye',{
      timeout: 20
     });
 
-    client.subscribe('/channel', function(message) {
-     $('#messages').append('<p>' + message.text + '</p>');
+    client.subscribe('/channel2', function(message){
+     $('#messages').append('<h2 class="companyName">'+ message.header +'</h2>');
     });
+
+    client.subscribe('/channel', function(message) {
+     $('#messages').append('<p class="likedbyCompany">' + message.text + '</p>');
+    });
+   });
   

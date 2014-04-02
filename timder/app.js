@@ -24,9 +24,6 @@ var app = express();
 var server = http.createServer(app);
 bayeux.attach(server);
 
-//sessions code
-
-
 // all environments
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -51,16 +48,12 @@ app.get('/newuser', routes.newuser);
 
 //postpages
 app.post('/adduser', routes.adduser(db));
+app.post('/companyuser', routes.companyuser);
 
 app.configure(function() {
-    app.use(express.bodyParser());
+    app.use(express.json());
+    app.use(express.urlencoded());
     app.use(express.static(__dirname + '/public'));
-});
-
-app.post('/message', function(req, res) {
-    bayeux.getClient().publish('/channel', { text: req.body.message });
-    console.log('broadcast message:' + req.body.message);
-    res.send(200);
 });
 
 server.listen(3000);
