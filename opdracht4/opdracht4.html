@@ -2,13 +2,18 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Untitled Document</title>
+<title>WeatherApp</title>
 <script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
 
 <body onload="getLocation()">
-	<script>
+    <h1>Temperatuur nu:</h1>
+    <h1 id="temperatuur"></h1>
+    </ul>
+    <ul id="beschrijvingWeek"></ul>
+    
+<script>
     function getLocation()
     {
     	if (navigator.geolocation)
@@ -26,6 +31,18 @@
 		var dateTime = date.getTime();
 		var clearDateTimeData = localStorage.getItem('clearDateTimeData');
 		
+		var cel = localStorage.getItem("cel");
+        var locatie = localStorage.getItem("locatie");
+        var beschrijving = localStorage.getItem("beschrijving");
+        var neerslag = localStorage.getItem("neerslag");
+        var wind = localStorage.getItem("wind");
+        var min = localStorage.getItem("min");
+        var max = localStorage.getItem("max");
+        var week = localStorage.getItem("beschrijvingWeek");
+        
+        $("#temperatuur").append(Math.round(cel)+"°");
+        $("#beschrijvingWeek").append(JSON.parse(week));
+		
 		//wanneer er nog geen uur voorbij is en de api nog gehouden mag worden.
 		if(dateTime >= (clearDateTimeData) || typeof(clearDateTimeData) == null){
 			localStorage.clear();
@@ -39,40 +56,49 @@
 					dataType: 'jsonp'
 					})
 					.done(function(data){
-						var dataToStore = JSON.stringify(data);
-						localStorage.setItem('someData', dataToStore);
-						var localData = JSON.parse(localStorage.getItem('someData'));
-						console.log(localData, "Nieuwe data");
-				});
-		}
+				        localStorage.setItem("cel",((data.currently.temperature)-32)*5/9);
+                        localStorage.setItem("locatie", data.timezone);
+                        localStorage.setItem("beschrijving", data.currently.summary);
+                        localStorage.setItem("neerslag", data.currently.precipProbability);
+                        localStorage.setItem("wind", data.currently.windSpeed);
+                        localStorage.setItem("min",((data.daily.data[0].temperatureMin)-32)*5/9);
+                        localStorage.setItem("max",((data.daily.data[0].temperatureMax)-32)*5/9);
+                        
+                        var d=new Date();
+                        var weekday=new Array(7);
+                            weekday[0]="Sunday";
+                            weekday[1]="Monday";
+                            weekday[2]="Tuesday";
+                            weekday[3]="Wednesday";
+                            weekday[4]="Thursday";
+                            weekday[5]="Friday";
+                            weekday[6]="Saturday";
+                            
+                        var arrayTot = [];
+                            for(var i=1; i<8; i++){
+                            var beschr = data.daily.data[i].summary;
+                            var minWeek = ((data.daily.data[i].temperatureMin)-32)*5/9;
+                            var maxWeek = ((data.daily.data[i].temperatureMax)-32)*5/9;
+                            
+                            var x = d.getDay()+i;
+                            if(x>6){
+                              x = x-7;
+                            }
+                            
+                            var weekdag = weekday[x];
+
+                            arrayTot = arrayTot + ("<li><h2>"+weekdag+"</h2>"+beschr+"<span>"+Math.round(minWeek)+"°-"+Math.round(maxWeek)+"°</span></li>"); 
+                            }
+                        localStorage.setItem("beschrijvingWeek", JSON.stringify(arrayTot));
+                    });
+         }
 		
 		//wanneer er gecleared mag worden en een nieuwe api opgehaald mag worden.
 		else{
 			var localData = JSON.parse(localStorage.getItem('someData'));	
 			console.log(localData, "Oude data");
 		}
-		var formule = (5/9);
-		for(var i=0; i<localData.daily.data.length; i++){
-			var formuleC = (localData.daily.data[i].temperatureMax - 32)*(5/9);
-			var day= date.getDay()+ i;
-			/*if(day >= 8)
-			{
-				day = i-(i-1) ;	
-			}*/
-			console.log(day);
-			
-			$("#weekView").append("<li>"+formuleC.toFixed(2)+" °C</li>");
-		}
-		
-		var temperatureMaxTomF = (localData.currently.temperature - 32)* (5/9);
-		var temperatureMaxTomC = temperatureMaxTomF.toFixed(2);
-		document.getElementById("temperatuur").innerHTML=temperatureMaxTomC + " °C";
-      }
+    }
     </script>
-    <h1>Temperatuur nu:</h1>
-    <h1 id="temperatuur"></h1>
-    <ul id="weekView">
-    	
-    </ul>
 </body>
 </html>
