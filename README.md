@@ -53,15 +53,18 @@ GitHub is not the only provider of Git hosting, but it's one of the most famous 
 *Pull requests* notify users about changes you pushed to a repository. After you initiate a pull request on GitHub, your changes can be reviewed and people can comment on your work. Once approved, the owner of the forked repository can decide to merge your changes into the repository so that anyone can pull in your changes. 
 
 ## Advanced Javascript
-* syntax
-* prototypes
-* event handling
-* objects
-* inheritance
-* namespacing
-* closures
-* module pattern
-* bower
+During these lessons we focused on more advanced usage of Javascript, where we would learn to make our own prototype functions and framework and learn to work with the concept of DRY (Don't Repeat Yourself).
+
+### prototypes
+Prototypes enable us to make our own little 'framework' with Javascript which enable us to create the exact functions we need without having to load the entire JQuery framework into the application (this decreases the loadtime, especially for mobile applications).
+
+### event handling
+### objects
+### inheritance
+### namespacing
+### closures
+### module pattern
+### bower
 
 ## Animating with CSS
 ### Transitions
