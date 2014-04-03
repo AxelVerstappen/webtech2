@@ -116,11 +116,6 @@ In a way, animations and transitions are the same, they can both change the appe
 * An animation consists of keyframes which divide the duration of the animation into %'s, while a transition executes the order in even steps over the given time.
 * An animation can start whenever you want it to and keep on looping, but a transition has to be triggered by something (i.e. a button click).
 
-## CSS Pre-processors
-
-* sass, less & stylus
-* compass & bourbon 
-
 ## Realtime apps with node.js and socket.io
 
 ####what is node.js
