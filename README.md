@@ -64,24 +64,54 @@ GitHub is not the only provider of Git hosting, but it's one of the most famous 
 * bower
 
 ## Animating with CSS
-
 ### Transitions
+A transition in CSS3 is an animation between changes. These transitions are often being triggered by the class' pseude-selectors like :hover. 
+
+A transition in code consists of 4 elements: property duration timing-function delay;
+In code this would look like: `transition: background-color 5s linear 1s;`
+
+This will trigger the given class to change to the given background-color in the :hover pseudo-selecter over 5s with a linear timing-function with 1s steps.
 
 ### Transforms
+Transforming an element means to physically change the look of an element, like change it's size, angle or position.
+
+Transformations are often used together with a transition to add a certain duration for the transformation.
 
 #### 2D Transforms
 * translate()
+The translate method can make elements move over the screen without messing with your layout of the other elements. *translateX* moves an element from left to right or from right to left, while *translateY* moves the elements from top to bottom or vice versa.
+
 * rotate()
+The rotate function can make elements rotate a certain amount of degrees.
+
 * scale()
+The scale method can make elements grow or shrink according to the parameter you give with the function. The parameter is a decimal number (i.e. 2.1 or 3.5) and will make your element multiply it's size by whatever number you set.
+
 * skew()
+The skew method will turn an element in a given angle, depending on the parameters given for the X-axis and Y-axis.
+
 * matrix()
+The matrix method combines all of the 2D transform methods into one.
+
+The matrix method take six parameters, containing mathematic functions, which allows you to: rotate, scale, move (translate), and skew elements.
 
 #### 3D Transforms
 * rotateX
+With the rotateX method, the element rotates around its X-axis at a given degree.
+
 * rotateY
+With the rotateY method, the element rotates around its Y-axis at a given degree.
+
 * perspective
+The perspective method sets the angle of the view on an element. 
+
+	The higher the value, the further you are away from the element.
+	The lower the value, the closer you are to the element.
 
 ### Animations
+In a way, animations and transitions are the same, they can both change the appearance of an element but there are some differences between them: 
+* An animation consists of keyframes which divide the duration of the animation into %'s, while a transition executes the order in even steps over the given time.
+* An animation can start whenever you want it to and keep on looping, but a transition has to be triggered by something (i.e. a button click).
 
 ## CSS Pre-processors
 
