@@ -1,8 +1,9 @@
 extends layout
 
 block content
-  h1=companyname
-  ul
+  h1= "Selectie voor: " + companyname
+  
+  ul#userlist
    each user, i in userlist
     li.listitems
      a(href="")= user.firstname + " " + user.lastname
@@ -12,22 +13,47 @@ block content
      img(src=user.workphotos[2].photo)
      input(class="likeBtn likeDislikeBtns", type="button", value="Like")
      input(class="dislikeBtn likeDislikeBtns", type="button", value="Dislike")
+     
+  form#herStartForm(name="herstart",method="post",action="/resetcompanyuser")
+   button#btnSubmit(type="submit", style="display: none;") Herstarten!
 
   script.
    $( document ).ready(function() {
     var client = new Faye.Client('/faye',{
      timeout: 20
     });
-
+    
+    
+    //Lijst at random sorteren
+    var $ul = $('#userlist');
+    $('li', $ul).sort(function(){
+        return (Math.round(Math.random())-0.5)
+    }).appendTo($ul);
+    
+    
+    //Post naar scoreboard en databank bij een like en fadeout erna
     $(".likeBtn").click(function(e) {
      var voteName = $(this).parent().find('a');
 
      client.publish('/channel', {
       text: voteName.text()
      });
+     
+     $.ajax({
+      type: 'POST',
+      url: "/insertvotes",
+      data: {votedname: voteName.text()},
+      success: function (data) {
+        console.log("Success");
+      },
+      dataType: "json"
+     });
+     
      e.preventDefault();
     });
     
+    
+    //Fadeout bij een dislike
     $(".likeDislikeBtns").click(function(e){
      var parent = $(this).parent();
      
@@ -36,7 +62,7 @@ block content
         var checklistitems = document.getElementsByClassName('listitems');
         if(checklistitems.length == 0)
         {
-         alert('Gedaan');
+         $("#btnSubmit").css("display", "block");
         }
      });
      e.preventDefault();

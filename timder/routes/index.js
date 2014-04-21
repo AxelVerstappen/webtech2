@@ -6,11 +6,23 @@
 var companyname = "";
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express'});
 };
 
-exports.scoreboard = function(req, res){
-  res.render('scoreboard', { title: 'Scoreboard' });
+exports.newuser = function(req, res){
+  res.render('newuser', { title: 'Add New User' });
+};
+
+exports.scoreboard = function(db){
+    return function(req, res) {
+        var collection = db.get('votecollection');
+        collection.find({},{},function(e,docs){
+            res.render('scoreboard', {
+                "companylist" : docs, 
+                title: 'Scoreboard'
+            });
+        });
+    };
 };
 
 exports.userlist = function(db) {
@@ -20,7 +32,8 @@ exports.userlist = function(db) {
 			collection.find({},{},function(e,docs){
 				res.render('userlist', {
 					"userlist" : docs, 
-					"companyname": companyname
+					"companyname": companyname,
+                    title: 'Testing'
 				});
 			});
 		}
@@ -32,9 +45,6 @@ exports.userlist = function(db) {
     };
 };
 
-exports.newuser = function(req, res){
-  res.render('newuser', { title: 'Add New User' });
-};
 
 exports.adduser = function(db) {
     return function(req, res) {
@@ -56,7 +66,6 @@ exports.adduser = function(db) {
             "firstname" : firstName,
 			"lastname" : lastName,
             "email" : email,
-			"password" : password,
 			"work" : work,
             "workphotos" : [
 				{"photo": workphoto1},
@@ -79,10 +88,58 @@ exports.adduser = function(db) {
     }
 }
 
-exports.companyuser = function(req, res){
-	var submittedName = req.body.companyname;
-  	companyname = submittedName;
-	
-	res.location("userlist");
-	res.redirect("userlist");
+exports.setcompanyuser = function(db){
+    return function(req, res){
+        companyname = req.body.companyname;
+        var companyNameData = req.body.companyname;
+        
+        var collection = db.get('votecollection');
+        
+        collection.insert({
+            "companyname" : companyNameData,
+            "votes" : [
+                
+            ]
+        }, function (err, doc) {
+            if (err) {
+                // Failed -> error boodschap geven
+                res.send("There was a problem adding the information to the database.");
+            }
+            else {
+                // Header url naar /userlist aanpassen als het succesvol is.
+                //res.location("newuser");
+                // En naar de succes pagina sturen.
+                //res.redirect("newuser");
+            }
+        });
+    }
 };
+
+exports.resetcompanyuser = function(req, res){
+  companyname = "";
+  res.location("/");
+  res.redirect("/");
+};
+
+exports.insertvotes = function(db){
+    return function(req, res){
+        var votedName = req.body.votedname;
+        
+        var collection = db.get('votecollection');
+        
+        collection.update(
+            {"companyname": companyname},
+            {
+                $push: {"votes" : {"votedname": votedName}}
+            }
+        , function (err, doc) {
+            if (err) {
+                // Failed -> error boodschap geven
+                res.send("There was a problem adding the information to the database.");
+            }
+            else {
+            
+            }
+        });
+    }
+}

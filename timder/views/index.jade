@@ -4,12 +4,10 @@ block content
 
   h1= title
   
-  form#formCompanyName(name="companyuser",method="post", action="/companyuser")
-   label(for="companyname")="Wie bent u?: "
-   input#inputCompanyName(type="text", placeholder="Naam", name="companyname")
-   
-   br
-   button#btnSubmit(type="submit") Start the selection!
+  label(for="companyname")="Wie bent u?: "
+  input#inputCompanyName(type="text", placeholder="Naam", name="companyname")
+  br
+  button#btnSubmit(type="submit") Start the selection!
    
    script.
     $( document ).ready(function() {
@@ -17,12 +15,36 @@ block content
       timeout: 20
      });
      
-     $("#formCompanyName").click(function() {
+     $("#btnSubmit").on("click", function(e) {
       var inputCompanyName = $("#inputCompanyName");
-
-      client.publish('/channel2', {
-       header: inputCompanyName.val()
+     
+      $.ajax({
+            type: 'POST',
+            url: "/setcompanyuser",
+            data: {companyname: inputCompanyName.val()},
+            success: function (data) {
+                console.log("Success");
+            },
+            dataType: "json",
+            done: doneFunction()
       });
+      
+      function doneFunction()
+      {
+          client.publish('/channel2', {
+                   header: inputCompanyName.val()
+          });
+          
+          redirectFunction();
+      }
+      
+      function redirectFunction()
+      {
+        setTimeout(function(){
+            window.location.href="/userlist";
+        }, 1000);
+      }
+      e.preventDefault();
      });
     });
 

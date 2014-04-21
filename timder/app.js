@@ -25,6 +25,7 @@ var server = http.createServer(app);
 bayeux.attach(server);
 
 // all environments
+app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
@@ -40,21 +41,17 @@ if ('development' == app.get('env')) {
 }
 
 //getpages
-app.get('/scoreboard', routes.scoreboard);
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/userlist', routes.userlist(db));
+app.get('/scoreboard', routes.scoreboard(db));
 app.get('/newuser', routes.newuser);
 
 //postpages
 app.post('/adduser', routes.adduser(db));
-app.post('/companyuser', routes.companyuser);
-
-app.configure(function() {
-    app.use(express.json());
-    app.use(express.urlencoded());
-    app.use(express.static(__dirname + '/public'));
-});
+app.post('/insertvotes', routes.insertvotes(db));
+app.post('/setcompanyuser', routes.setcompanyuser(db));
+app.post('/resetcompanyuser', routes.resetcompanyuser);
 
 server.listen(3000);
 console.log("Server up and listening on port 3000")
