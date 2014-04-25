@@ -106,10 +106,7 @@ exports.setcompanyuser = function(db){
                 res.send("There was a problem adding the information to the database.");
             }
             else {
-                // Header url naar /userlist aanpassen als het succesvol is.
-                //res.location("newuser");
-                // En naar de succes pagina sturen.
-                //res.redirect("newuser");
+                res.send("Added companyname to database!");
             }
         });
     }
@@ -138,7 +135,7 @@ exports.insertvotes = function(db){
                 res.send("There was a problem adding the information to the database.");
             }
             else {
-            
+                res.send("Added vote to database!");
             }
         });
     }

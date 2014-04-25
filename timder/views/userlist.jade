@@ -4,15 +4,14 @@ block content
   h1= "Selectie voor: " + companyname
   
   ul#userlist
-   each user, i in userlist
-    li.listitems
-     a(href="")= user.firstname + " " + user.lastname
-     p= user.work
-     img(src=user.workphotos[0].photo)
-     img(src=user.workphotos[1].photo)
-     img(src=user.workphotos[2].photo)
-     input(class="likeBtn likeDislikeBtns", type="button", value="Like")
-     input(class="dislikeBtn likeDislikeBtns", type="button", value="Dislike")
+     - for (var t = 0; t <= 2; ++t)
+       each user, i in userlist
+         li.listitems
+          a(href="")= user.firstname + " " + user.lastname
+          p= user.work
+          img(src=user.workphotos[t].photo)
+          input(class="likeBtn likeDislikeBtns", type="button", value="Like")
+          input(class="dislikeBtn likeDislikeBtns", type="button", value="Dislike")
      
   form#herStartForm(name="herstart",method="post",action="/resetcompanyuser")
    button#btnSubmit(type="submit", style="display: none;") Herstarten!

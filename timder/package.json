@@ -11,5 +11,9 @@
     "faye": "*",
     "mongodb": "*",
     "monk": "*"
+  },
+  "devDependencies": {
+    "gulp-concat-css": "^0.1.4",
+    "gulp-livereload": "^1.3.1"
   }
 }
