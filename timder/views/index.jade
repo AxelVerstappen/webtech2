@@ -17,8 +17,12 @@ block content
      
      $("#btnSubmit").on("click", function(e) {
       var inputCompanyName = $("#inputCompanyName");
-     
-      $.ajax({
+      
+      var publication = client.publish('/channel2', {header: inputCompanyName.val()});
+
+      publication.then(function() {
+        //alert('Message received by server!');
+        $.ajax({
             type: 'POST',
             url: "/setcompanyuser",
             data: {companyname: inputCompanyName.val()},
@@ -26,17 +30,11 @@ block content
                 console.log("Success");
             },
             dataType: "json",
-            done: doneFunction()
+            done: redirectFunction()
+        });
+      }, function(error) {
+        alert('There was a problem: ' + error.message);
       });
-      
-      function doneFunction()
-      {
-          client.publish('/channel2', {
-                   header: inputCompanyName.val()
-          });
-          
-          redirectFunction();
-      }
       
       function redirectFunction()
       {
