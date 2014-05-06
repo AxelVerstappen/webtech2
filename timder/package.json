@@ -10,7 +10,12 @@
     "jade": "*",
     "faye": "*",
     "mongodb": "*",
-    "monk": "*"
+    "monk": "*",
+    "passport" : "~0.1.17", 		
+    "passport-local" : "~0.1.6",
+    "connect-flash" : "~0.1.1", 	
+    "bcrypt-nodejs" : "latest",
+    "leapjs": "0.5.0"
   },
   "devDependencies": {
     "gulp-concat-css": "^0.1.4",

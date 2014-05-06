@@ -35,6 +35,7 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
 
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -46,9 +47,13 @@ app.get('/users', user.list);
 app.get('/userlist', routes.userlist(db));
 app.get('/scoreboard', routes.scoreboard(db));
 app.get('/newuser', routes.newuser);
+app.get('/admin', routes.admin(db));
 
 //postpages
 app.post('/adduser', routes.adduser(db));
+app.post('/removeuser', routes.removeuser(db));
+app.post('/removevote', routes.removevote(db));
+app.post('/cleardb', routes.cleardb(db));
 app.post('/insertvotes', routes.insertvotes(db));
 app.post('/setcompanyuser', routes.setcompanyuser(db));
 app.post('/resetcompanyuser', routes.resetcompanyuser);

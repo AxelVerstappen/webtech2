@@ -7,42 +7,42 @@ block content
   label(for="companyname")="Wie bent u?: "
   input#inputCompanyName(type="text", placeholder="Naam", name="companyname")
   br
+  select#inputWorkType(name="worktype")
+    option(value="design", selected="selected")="Design"
+    option(value="development")="Development"
+    option(value="designdevelopment")="Design & Development"
+  br
   button#btnSubmit(type="submit") Start the selection!
    
    script.
     $( document ).ready(function() {
+     var inputWorkType = $('select').val();
+     var inputCompanyName = $("#inputCompanyName");
+     
+     $('select').change(function() {
+            inputWorkType=$(this).val();
+     });
+      
      var client = new Faye.Client('/faye',{
       timeout: 20
      });
      
      $("#btnSubmit").on("click", function(e) {
-      var inputCompanyName = $("#inputCompanyName");
-      
       var publication = client.publish('/channel2', {header: inputCompanyName.val()});
-
+      
       publication.then(function() {
-        //alert('Message received by server!');
         $.ajax({
             type: 'POST',
             url: "/setcompanyuser",
-            data: {companyname: inputCompanyName.val()},
+            data: {companyname: inputCompanyName.val(), worktype: inputWorkType},
             success: function (data) {
-                console.log("Success");
+                window.location = data.redirect
             },
-            dataType: "json",
-            done: redirectFunction()
+            dataType: "json"
         });
-      }, function(error) {
+       }, function(error) {
         alert('There was a problem: ' + error.message);
-      });
-      
-      function redirectFunction()
-      {
-        setTimeout(function(){
-            window.location.href="/userlist";
-        }, 1000);
-      }
-      e.preventDefault();
+       });
      });
     });
 

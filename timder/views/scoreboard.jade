@@ -4,18 +4,7 @@ block content
   h1= title
   
   div#messages
-  
-  ul
-   h2= 'Vorige selecties'
-   each company, i in companylist
-    li.listitems
-     h2= company.companyname
-     if company.votes
-      -for (var t=0; t < company.votes.length; t++)
-       p= company.votes[t].votedname
-     else
-      p='Geen match gevonden :('
-       
+    
   script.
    $( document ).ready(function() {
     var client = new Faye.Client('/faye',{
@@ -29,5 +18,6 @@ block content
     client.subscribe('/channel', function(message) {
      $('#messages').append('<p class="likedbyCompany">' + message.text + '</p>');
     });
+    
    });
   

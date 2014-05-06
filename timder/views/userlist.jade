@@ -7,9 +7,9 @@ block content
      - for (var t = 0; t <= 2; ++t)
        each user, i in userlist
          li.listitems
-          a(href="")= user.firstname + " " + user.lastname
-          p= user.work
+          h3= user.firstname + " " + user.lastname
           img(src=user.workphotos[t].photo)
+          p= user.workdescriptions[t].description
           input(class="likeBtn likeDislikeBtns", type="button", value="Like")
           input(class="dislikeBtn likeDislikeBtns", type="button", value="Dislike")
      
@@ -32,7 +32,7 @@ block content
     
     //Post naar scoreboard en databank bij een like en fadeout erna
     $(".likeBtn").click(function(e) {
-     var voteName = $(this).parent().find('a');
+     var voteName = $(this).parent().find('h3');
 
      client.publish('/channel', {
       text: voteName.text()

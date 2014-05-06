@@ -6,3 +6,17 @@ body {
 a {
   color: #00B7FF;
 }
+
+#userlist li
+{
+    background-color: #CCC;
+    height: 550px;
+    width: 550px;
+    position: fixed;
+}
+
+#userlist li img
+{
+    max-width: 500px;
+    max-height: 500px;
+}
