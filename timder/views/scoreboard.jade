@@ -6,19 +6,6 @@ block content
   div#messages
   
   body
-   h1= 'Leap Javascript Sample'
-   div(id="main")
-    h3= 'Frame data:'
-    div(id="frameData")
-    div(style="clear:both;")
-    h3= 'Hand data:'
-    div(id="handData")
-    div(style="clear:both;")
-    h3= 'Finger and tool data:'
-    div(id="pointableData")
-    div(style="clear:both;")
-    h3= 'Gesture data:'
-    div(id="gestureData")
     
   script.
    $( document ).ready(function() {
@@ -34,52 +21,5 @@ block content
      $('#messages').append('<p class="likedbyCompany">' + message.text + '</p>');
     });
     
-    // Setup Leap loop with frame callback function
-    var controller = new Leap.Controller({
-      host: '127.0.0.1',
-      port: 6437,
-      enableGestures: true,
-      frameEventName: 'animationFrame'
-    });
-    var frame;
-    var gestures;
-
-    //check connection
-    controller.on('connect', function() {
-      console.log("Successfully connected.");
-    });
-
-    //get frames
-    controller.on( 'frame' , function( data ){
-
-    this.frame = data;
-
-        //for( var i =  0; i < this.frame.gestures.length; i++){
-
-            try {
-                var gesture  = this.frame.gestures[0];
-                var type = gesture.type;
-                console.log(type);
-                console.log(gesture.startPosition);
-                console.log(gesture.position);
-
-                if(gesture.startPosition[0] > gesture.position[0])
-                {
-                    $('#gestureData').append('<p>Links</p>');
-                    
-                    
-                } else {
-                    $('#gestureData').append('<p>Rechts</p>');
-                }
-            } catch (err) {
-                console.log(err);
-                // generates error on !swipe
-            }
-
-        //}
-
-    });
-
-    controller.connect();
    });
   
