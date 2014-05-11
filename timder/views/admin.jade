@@ -1,64 +1,69 @@
 extends layout
 
 block content
-  h1= title
-  
-  div#messages
-  
-  ul#users
-   h2= 'Gebruikers'
-   each user, i in userlist
-         li.listitems
-          p.userid(style="display: none")= user._id
-          h3= user.firstname + " " + user.lastname
-          input(class="removeUserBtn", type="button", value="Verwijder")
-          
-  ul#votelist
-   h2= 'Vorige selecties'
-   each company, i in companylist
-    li.listitems
-     p.voteid(style="display: none")= company._id
-     h2= company.companyname
-     if company.votes
-      -for (var t=0; t < company.votes.length; t++)
-       p= company.votes[t].votedname
-     else
-      p='Geen match gevonden :('
-     input(class="removeVoteBtn", type="button", value="Verwijder")
-  
-  form#formAddUser(name="cleardb",method="post",action="/cleardb")
-    input(type="submit", value="Alle resultaten verwijderen")
-  
+  div#logo
+    a(href="/")
+     img(src="/images/logo.svg", alt="logo")
+  h1#title
+    span= title
+  div#adminContent  
+      ul#users.adminContentList
+       h2= 'GEBRUIKERS'
+       each user, i in userlist
+             li.singlePost
+                label 
+                 p.userid(style="display: none")= user._id
+                 = user.firstname + " " + user.lastname
+                 input(class="removeUserBtn buttonSmall", type="button", value="Verwijder")
+
+      ul#votelist.adminContentList
+       h2= 'VORIGE SELECTIES'
+       each company, i in companylist
+        li.singlePost
+             label
+              p.voteid(style="display: none")= company._id
+              = company.companyname
+              //br
+              //if company.votes != 0
+               -for (var t=0; t < company.votes.length; t++)
+                p= company.votes[t].votedname
+                //br
+              //else
+               p='Geen match gevonden :-('
+              input(class="removeVoteBtn buttonSmall", type="button", value="Verwijder")
+       form#formCleardb(name="cleardb",method="post",action="/cleardb")
+        input(type="submit", class="button", value="Alle resultaten verwijderen")
   script.
-   $(".removeUserBtn").click(function(e) {
-     var userid = $(this).parent().find('.userid');
-     
-     $.ajax({
-      type: 'POST',
-      url: "/removeuser",
-      data: {userid: userid.text()},
-      success: function (data) {
-            window.location = data.redirect
-      },
-      dataType: "json"
+   $( document ).ready(function() {
+       $(".removeUserBtn").click(function(e) {
+         var userid = $(this).parent().find('.userid');
+
+         $.ajax({
+          type: 'POST',
+          url: "/removeuser",
+          data: {userid: userid.text()},
+          success: function (data) {
+                window.location = data.redirect
+          },
+          dataType: "json"
+         });
+
+         e.preventDefault();
+        });
+
+        $(".removeVoteBtn").click(function(e) {
+         var voteid = $(this).parent().find('.voteid');
+
+         $.ajax({
+          type: 'POST',
+          url: "/removevote",
+          data: {voteid: voteid.text()},
+          success: function (data) {
+                window.location = data.redirect
+          },
+          dataType: "json"
+         });
+
+         e.preventDefault();
+        });
      });
-     
-     e.preventDefault();
-    });
-    
-    $(".removeVoteBtn").click(function(e) {
-     var voteid = $(this).parent().find('.voteid');
-     
-     $.ajax({
-      type: 'POST',
-      url: "/removevote",
-      data: {voteid: voteid.text()},
-      success: function (data) {
-            window.location = data.redirect
-      },
-      dataType: "json"
-     });
-     
-     e.preventDefault();
-    });
-  

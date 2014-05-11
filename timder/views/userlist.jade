@@ -1,20 +1,26 @@
 extends layout
 
-block content
-  h1= "Selectie voor: " + companyname
-  
+block content 
   ul#userlist
      - for (var t = 0; t <= 2; ++t)
        each user, i in userlist
          li.listitems
-          h3= user.firstname + " " + user.lastname
+          h3(style="display: none;")= user.firstname + " " + user.lastname
           img(src=user.workphotos[t].photo)
           p= user.workdescriptions[t].description
-          input(class="likeBtn likeDislikeBtns", type="button", value="Like")
-          input(class="dislikeBtn likeDislikeBtns", type="button", value="Dislike")
+  section#swipeLeft.swipeSection
+   span
+    div.arrow-left
+      p="Veeg naar links"
+      span="< Hate"
+  section#swipeRight.swipeSection
+   span
+    div.arrow-right
+     p="Veeg naar rechts"
+     span="Love >"
      
   form#herStartForm(name="herstart",method="post",action="/resetcompanyuser")
-   button#btnSubmit(type="submit", style="display: none;") Herstarten!
+   button#btnSubmit(type="submit", class="button", style="display: none;") Herstarten!
 
   script.
    $( document ).ready(function() {
@@ -29,41 +35,57 @@ block content
         return (Math.round(Math.random())-0.5)
     }).appendTo($ul);
     
+    var klikRechts = $('#swipeRight').children('span');
+    var klikLinks = $('#swipeLeft').children('span');
     
-    //Post naar scoreboard en databank bij een like en fadeout erna
-    $(".likeBtn").click(function(e) {
-     var voteName = $(this).parent().find('h3');
+    klikRechts.on('click', function(e){
+        var listitem = $('.listitems').last();
+        
+        listitem.addClass('animated slideOutRight');
+                        
+        listitem.fadeOut(2000, function(){
 
-     client.publish('/channel', {
-      text: voteName.text()
-     });
-     
-     $.ajax({
-      type: 'POST',
-      url: "/insertvotes",
-      data: {votedname: voteName.text()},
-      success: function (data) {
-        console.log("Success");
-      },
-      dataType: "json"
-     });
-     
+            var voteName = listitem.find('h3');
+
+            client.publish('/channel', {
+              text: voteName.text()
+             });
+
+            $.ajax({
+              type: 'POST',
+              url: "/insertvotes",
+              data: {votedname: voteName.text()},
+              success: function (data) {
+                console.log("Success");
+              },
+              dataType: "json"
+             });
+
+            listitem.remove();
+
+            var checklistitems = document.getElementsByClassName('listitems');
+            if(checklistitems.length == 0)
+            {
+             $("#btnSubmit").css("display", "block");
+             $('.swipeSection').fadeOut(1000);
+            }
+        });
+        e.preventDefault();
+    });
+    
+    klikLinks.on('click', function(e){
+        var listitem = $('.listitems').last();
+        listitem.addClass('animated slideOutLeft');
+        listitem.fadeOut(2000, function(){
+            listitem.remove()
+            var checklistitems = document.getElementsByClassName('listitems');
+            if(checklistitems.length == 0)
+            {
+             $("#btnSubmit").css("display", "block");
+             $('.swipeSection').fadeOut(1000);
+            }
+        });
      e.preventDefault();
     });
     
-    
-    //Fadeout bij een dislike
-    $(".likeDislikeBtns").click(function(e){
-     var parent = $(this).parent();
-     
-     parent.fadeOut("slow", function(){
-        parent.attr('class', 'invisible');
-        var checklistitems = document.getElementsByClassName('listitems');
-        if(checklistitems.length == 0)
-        {
-         $("#btnSubmit").css("display", "block");
-        }
-     });
-     e.preventDefault();
-    });
    });

@@ -7,11 +7,11 @@ var companyname = "";
 var worktype = "";
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express'});
+  res.render('index', { title: 'tIMDer' });
 };
 
 exports.newuser = function(req, res){
-  res.render('newuser', { title: 'Add New User' });
+  res.render('newuser', { title: 'IMD held toevoegen'});
 };
 
 exports.scoreboard = function(db){
@@ -20,7 +20,7 @@ exports.scoreboard = function(db){
         collection.find({},{},function(e,docs){
             res.render('scoreboard', {
                 "companylist" : docs, 
-                title: 'Scoreboard'
+                title: 'Matches'
             });
         });
     };
@@ -34,7 +34,7 @@ exports.userlist = function(db) {
 				res.render('userlist', {
 					"userlist" : docs, 
 					"companyname": companyname,
-                    title: 'Selectie voor: '+ companyname
+                    title: companyname + " selectie"
 				});
 			});
 		}
@@ -65,54 +65,85 @@ exports.admin = function(db){
 
 exports.adduser = function(db) {
     return function(req, res) {
-        // Form values eruit halen en in een variabele steken
-        var firstName = req.body.firstname;
-		var lastName = req.body.lastname;
-        var email = req.body.useremail;
-		var password = req.body.password;
+        //Check op leegstaande velden
+        req.checkBody('firstname', 'Voornaam veld is leeg.').notEmpty();
+        req.checkBody('lastname', 'Achternaam veld is leeg.').notEmpty();
+        req.checkBody('useremail', 'Email veld is leeg.').notEmpty();
+        req.checkBody('worktext1', 'Eerste beschrijving is leeg.').notEmpty();
+        req.checkBody('worktext2', 'Tweede beschrijving is leeg.').notEmpty();
+        req.checkBody('worktext3', 'Derde beschrijving is leeg.').notEmpty();
+        req.checkBody('workphoto1', 'Eerste foto-url is leeg.').notEmpty();
+        req.checkBody('workphoto2', 'Tweede foto-url is leeg.').notEmpty();
+        req.checkBody('workphoto3', 'Derde foto-url is leeg.').notEmpty();
         
-		var worktext1 = req.body.worktext1;
-        var worktext2 = req.body.worktext2;
-        var worktext3 = req.body.worktext3;
+        //Check op correct gebruik van characters
+        req.checkBody('firstname', 'Voornaam veld bevat onbekende karakters.').isAlpha();
+        req.checkBody('lastname', 'Achternaam veld bevat onbekende karakters.').isAlpha();
+        req.checkBody('useremail', 'Geen geldig email adres.').isEmail();
         
-		var workphoto1 = req.body.workphoto1;
-		var workphoto2 = req.body.workphoto2;
-		var workphoto3 = req.body.workphoto3;
+        //Check op correcte URL
+        req.checkBody('workphoto1', 'Eerste foto-url is geen geldige URL.').isURL();
+        req.checkBody('workphoto2', 'Tweede foto-url is geen geldige URL.').isURL();
+        req.checkBody('workphoto3', 'Derde foto-url is geen geldige URL.').isURL();
         
-        var worktype = req.body.worktype;
+        var errors = req.validationErrors();  
+        if( !errors){   //No errors were found.  Passed Validation!
+            // Form values eruit halen en in een variabele steken
+            var firstName = req.body.firstname;
+            var lastName = req.body.lastname;
+            var email = req.body.useremail;
+            var password = req.body.password;
 
-        // Collection aanmaken
-        var collection = db.get('usercollection');
+            var worktext1 = req.body.worktext1;
+            var worktext2 = req.body.worktext2;
+            var worktext3 = req.body.worktext3;
 
-        // Submit to the DB
-        collection.insert({
-            "firstname" : firstName,
-			"lastname" : lastName,
-            "email" : email,
-            "worktype": worktype,
-			"workdescriptions" : [
-				{"description": worktext1},
-				{"description": worktext2},
-				{"description": worktext3}
-			],
-            "workphotos" : [
-				{"photo": workphoto1},
-				{"photo": workphoto2},
-				{"photo": workphoto3}
-			]
-        }, function (err, doc) {
-            if (err) {
-                // Failed -> error boodschap geven
-                res.send("There was a problem adding the information to the database.");
-            }
-            else {
-                // Header url naar /userlist aanpassen als het succesvol is.
-                res.location("newuser");
-                // En naar de succes pagina sturen.
-                res.redirect("newuser");
-            }
-        });
+            var workphoto1 = req.body.workphoto1;
+            var workphoto2 = req.body.workphoto2;
+            var workphoto3 = req.body.workphoto3;
 
+            var worktype = req.body.worktype;
+
+            // Collection aanmaken
+            var collection = db.get('usercollection');
+
+            // Submit to the DB
+            collection.insert({
+                "firstname" : firstName,
+                "lastname" : lastName,
+                "email" : email,
+                "worktype": worktype,
+                "workdescriptions" : [
+                    {"description": worktext1},
+                    {"description": worktext2},
+                    {"description": worktext3}
+                ],
+                "workphotos" : [
+                    {"photo": workphoto1},
+                    {"photo": workphoto2},
+                    {"photo": workphoto3}
+                ]
+            }, function (err, doc) {
+                if (err) {
+                    // Failed -> error boodschap geven
+                    res.send("There was a problem adding the information to the database.");
+                }
+                else {
+                    // Header url naar /userlist aanpassen als het succesvol is.
+                    res.location("newuser");
+                    // En naar de succes pagina sturen.
+                    res.redirect("newuser");
+                }
+            });
+        }
+        
+        else {   //Display errors to user
+            res.render('newuser', { 
+                title: 'IMD held toevoegen',
+                message: '',
+                errors: errors
+            });
+        }
     }
 }
 

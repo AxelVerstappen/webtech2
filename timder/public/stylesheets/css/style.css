@@ -1,0 +1,189 @@
+body {
+  font-family: "Oxygen", sans-serif;
+  text-align: center;
+  color: #252525; }
+  body ul {
+    list-style: none; }
+  body #title {
+    font-size: 2.1em;
+    margin-bottom: 1em; }
+    body #title span {
+      font-weight: bold;
+      font-size: 1.8em; }
+  body #startForm {
+    background-color: rgba(249, 244, 56, 0.9);
+    padding: 20px;
+    max-width: 33%;
+    min-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 2.5em; }
+  body .button {
+    padding: 15px 25px;
+    background-color: #e93f3c;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 2px solid #a52f2f;
+    font-size: 1.2em;
+    color: white;
+    margin-top: 0.7em; }
+    body .button:hover {
+      background-color: #a52f2f;
+      border: 2px solid #e93f3c; }
+  body .buttonSmall {
+    padding: 8px 12px;
+    background-color: #e93f3c;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 2px solid #a52f2f;
+    font-size: 1em;
+    color: white; }
+    body .buttonSmall:hover {
+      background-color: #a52f2f;
+      border: 2px solid #e93f3c; }
+  body #frontpageLabel {
+    font-size: 1.2em; }
+  body .inputField {
+    font-size: 1.2em; }
+  body #userlist {
+    padding-top: 3em; }
+    body #userlist .listitems {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      background-color: white;
+      padding-top: 3em; }
+      body #userlist .listitems img {
+        margin-left: auto;
+        margin-right: auto;
+        max-height: 70%;
+        max-width: 70%; }
+      body #userlist .listitems p {
+        margin-left: auto;
+        margin-right: auto;
+        max-height: 30%;
+        max-width: 70%;
+        background-color: rgba(249, 244, 56, 0.9);
+        padding: 1em;
+        font-style: italic;
+        font-size: 1.2em; }
+  body #btnSubmit {
+    margin-left: auto;
+    margin-right: auto; }
+  body #swipeLeft, body #swipeRight {
+    position: fixed;
+    display: block;
+    height: 100%;
+    width: 15%;
+    font-size: 1.2em; }
+    body #swipeLeft span, body #swipeRight span {
+      font-weight: bold;
+      font-size: 1.5em; }
+  body #swipeLeft {
+    left: 0;
+    top: 50%;
+    color: #ff3e3e; }
+  body #swipeRight {
+    right: 0;
+    top: 50%;
+    color: #00b20d; }
+  body #adminContent {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; }
+    body #adminContent #users {
+      margin-right: 10%; }
+    body #adminContent .adminContentList {
+      display: block;
+      float: left;
+      width: 45%;
+      min-width: 200px;
+      background-color: rgba(249, 244, 56, 0.9);
+      padding: 1em 0; }
+      body #adminContent .adminContentList h2 {
+        font-size: 1.2em;
+        font-weight: bold; }
+      body #adminContent .adminContentList .singlePost {
+        display: block;
+        float: left;
+        width: 85%; }
+        body #adminContent .adminContentList .singlePost label {
+          margin-left: auto;
+          margin-right: auto;
+          float: right;
+          font-size: 1.2em;
+          margin-top: 0.7em; }
+          body #adminContent .adminContentList .singlePost label .buttonSmall {
+            vertical-align: middle;
+            margin-left: 1em; }
+  body #accountWork {
+    min-width: 860px; }
+  body .adduserDiv {
+    background-color: rgba(249, 244, 56, 0.9);
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em 0em; }
+    body .adduserDiv textarea {
+      resize: none;
+      height: 200px; }
+    body .adduserDiv .inputField {
+      margin-bottom: 0.7em; }
+    body .adduserDiv .workDiv {
+      margin-left: auto;
+      margin-right: auto;
+      width: 85%; }
+    body .adduserDiv .work {
+      display: block;
+      float: left;
+      margin-left: 0.85em;
+      margin-right: 0.85em; }
+  body .error {
+    color: #e93f3c;
+    margin-bottom: 0.7em; }
+  body #messages {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    background-color: rgba(249, 244, 56, 0.9);
+    padding-bottom: 1em;
+    padding-top: 0.3em; }
+    body #messages h2 {
+      margin-top: 0.5em;
+      font-size: 1.8em;
+      font-weight: bold; }
+    body #messages p {
+      font-size: 1.5em; }
+
+nav {
+  width: 100%;
+  height: 3em;
+  display: block;
+  float: left;
+  margin-bottom: 3em; }
+  nav a {
+    display: block;
+    float: left;
+    width: 33.33%;
+    line-height: 3em;
+    height: inherit;
+    text-decoration: none;
+    background-color: white;
+    color: #252525;
+    font-weight: bold; }
+    nav a:hover {
+      background-color: #e93f3c;
+      color: white; }
+  nav .sideborder {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border-right: 1px solid #e93f3c; }

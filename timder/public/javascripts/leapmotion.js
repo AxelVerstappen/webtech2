@@ -8,6 +8,11 @@ $(document).ready(function(){
     });
     var frame;
     var gestures;
+    var readGesture = true;
+    
+    var client = new Faye.Client('/faye',{
+     timeout: 20
+    });
 
     //check connection
     controller.on('connect', function() {
@@ -17,52 +22,62 @@ $(document).ready(function(){
     //get frames
     controller.on( 'frame' , function( data ){
 
-    this.frame = data;
-
+    this.frame = data;            
         for (var i = 0; i < this.frame.gestures.length; i++){
-
             try {
                 var gesture  = this.frame.gestures[0];
                 var type = gesture.type;
-                    if(gesture.startPosition[0] > gesture.position[0])
+                    if(gesture.startPosition[0] < gesture.position[0] && readGesture) 
                     {
-                        var listitem = $('.listitems').last().fadeOut(3000);
-                        setTimeout(function(e){
-                            listitem.attr("class", "invisible");
-                            var checklistitems = document.getElementsByClassName('listitems');
-                            if(checklistitems.length == 0)
-                            {
-                             $("#btnSubmit").css("display", "block");
-                            }
-                        }, 3000);
-
-                    } if(gesture.startPosition[0] < gesture.position[0]) {
+                        readGesture = false;
                         var listitem = $('.listitems').last();
-                        var voteName = listitem.find('h3');
-
-                         client.publish('/channel', {
-                          text: voteName.text()
-                         });
-
-                         $.ajax({
-                          type: 'POST',
-                          url: "/insertvotes",
-                          data: {votedname: voteName.text()},
-                          success: function (data) {
-                            console.log("Success");
-                          },
-                          dataType: "json"
-                         });
+                        listitem.addClass('animated slideOutRight');
                         
-                        listitem.fadeOut(3000);
-                        setTimeout(function(e){
-                            listitem.attr("class", "invisible");
+                        listitem.fadeOut(2000, function(){
+                            
+                            readGesture = true;
+                            
+                            var voteName = listitem.find('h3');
+                            
+                            client.publish('/channel', {
+                              text: voteName.text()
+                             });
+                            
+                            $.ajax({
+                              type: 'POST',
+                              url: "/insertvotes",
+                              data: {votedname: voteName.text()},
+                              success: function (data) {
+                                console.log("Success");
+                              },
+                              dataType: "json"
+                             });
+                            
+                            listitem.remove();
+                            
                             var checklistitems = document.getElementsByClassName('listitems');
                             if(checklistitems.length == 0)
                             {
                              $("#btnSubmit").css("display", "block");
+                             $('.swipeSection').fadeOut(1000);
                             }
-                        }, 3000);
+                        });
+                    }
+                
+                    else
+                    {
+                        var listitem = $('.listitems').last();
+                        listitem.addClass('animated slideOutLeft');
+                        listitem.fadeOut(2000, function(){
+                            listitem.remove()
+                            var checklistitems = document.getElementsByClassName('listitems');
+                            if(checklistitems.length == 0)
+                            {
+                             $("#btnSubmit").css("display", "block");
+                             $('.swipeSection').fadeOut(1000);
+                            }
+                        });
+
                     }
             } catch (err) {
                 console.log(err);

@@ -1,18 +1,23 @@
 extends layout
-
 block content
-
-  h1= title
-  
-  label(for="companyname")="Wie bent u?: "
-  input#inputCompanyName(type="text", placeholder="Naam", name="companyname")
-  br
-  select#inputWorkType(name="worktype")
-    option(value="design", selected="selected")="Design"
-    option(value="development")="Development"
-    option(value="designdevelopment")="Design & Development"
-  br
-  button#btnSubmit(type="submit") Start the selection!
+   div#logo
+    a(href="/")
+     img(src="/images/logo.svg", alt="logo")
+   h1#title
+    p= "Presents: "
+    span= title
+   ul.error(style="display: none;")
+    li="Naam veld is leeg."
+   section#startForm
+      label(for="inputCompanyName", id="frontpageLabel")="Wie bent u?: "
+      input#inputCompanyName(type="text", placeholder="Naam", name="companyname", class="inputField")
+      br
+      select#inputWorkType(name="worktype", class="inputField")
+        option(value="design", selected="selected")="Design"
+        option(value="development")="Development"
+        option(value="designdevelopment")="Design & Development"
+      br
+      button#btnSubmit(type="submit", class="button") Start de selectie!
    
    script.
     $( document ).ready(function() {
@@ -28,21 +33,29 @@ block content
      });
      
      $("#btnSubmit").on("click", function(e) {
-      var publication = client.publish('/channel2', {header: inputCompanyName.val()});
-      
-      publication.then(function() {
-        $.ajax({
-            type: 'POST',
-            url: "/setcompanyuser",
-            data: {companyname: inputCompanyName.val(), worktype: inputWorkType},
-            success: function (data) {
-                window.location = data.redirect
-            },
-            dataType: "json"
-        });
-       }, function(error) {
-        alert('There was a problem: ' + error.message);
-       });
+      var checkInput = inputCompanyName.val();
+      if(checkInput != "")
+      {
+          var publication = client.publish('/channel2', {header: inputCompanyName.val()});
+
+          publication.then(function() {
+            $.ajax({
+                type: 'POST',
+                url: "/setcompanyuser",
+                data: {companyname: inputCompanyName.val(), worktype: inputWorkType},
+                success: function (data) {
+                    window.location = data.redirect
+                },
+                dataType: "json"
+            });
+           }, function(error) {
+            alert('There was a problem: ' + error.message);
+           });
+      }
+      else
+      {
+        $('.error').css('display', 'block');
+      }
      });
     });
 

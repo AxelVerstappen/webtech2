@@ -2,7 +2,10 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/css/reset.css' type="text/css")
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Oxygen:400,700' type="text/css")
+    link(rel='stylesheet', href='/stylesheets/css/style.css' type="text/css")
+    link(rel='stylesheet', href='/stylesheets/css/animate.min.css' type="text/css")
     script(src='http://code.jquery.com/jquery-latest.min.js')
     script(src='/faye/browser/faye-browser.js')
     script(src='/faye/client.js')
@@ -10,4 +13,8 @@ html
     script(src="/javascripts/leapmotion.js")
       
   body
+      nav
+         a(href="/scoreboard", class="sideborder")= "Live Matches"
+         a(href="/newuser", class="sideborder")= "IMD Held Toevoegen"
+         a(href="/admin")= "Admin"
     block content

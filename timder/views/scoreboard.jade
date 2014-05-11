@@ -1,10 +1,14 @@
 extends layout
 
 block content
-  h1= title
+  div#logo
+    a(href="/")
+     img(src="/images/logo.svg", alt="logo")
+  h1#title
+   span= title
   
   div#messages
-  
+   
   body
     
   script.

@@ -9,6 +9,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var expressValidator = require('express-validator');
 
 //db vars
 var mongo = require('mongodb');
@@ -32,8 +33,11 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(expressValidator());
 app.use(express.methodOverride());
 app.use(app.router);
+
+
 
 
 // development only
@@ -50,7 +54,7 @@ app.get('/newuser', routes.newuser);
 app.get('/admin', routes.admin(db));
 
 //postpages
-app.post('/adduser', routes.adduser(db));
+app.post('/newuser', routes.adduser(db));
 app.post('/removeuser', routes.removeuser(db));
 app.post('/removevote', routes.removevote(db));
 app.post('/cleardb', routes.cleardb(db));
