@@ -66,9 +66,11 @@ $(document).ready(function(){
                 
                     else
                     {
+                        readGesture = false;
                         var listitem = $('.listitems').last();
                         listitem.addClass('animated slideOutLeft');
                         listitem.fadeOut(2000, function(){
+                            readGesture = true;
                             listitem.remove()
                             var checklistitems = document.getElementsByClassName('listitems');
                             if(checklistitems.length == 0)

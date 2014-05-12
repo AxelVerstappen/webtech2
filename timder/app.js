@@ -14,7 +14,7 @@ var expressValidator = require('express-validator');
 //db vars
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/timder');
+var db = monk('mongodb://Admin:x1c5k9l7h3@oceanic.mongohq.com:10078/timder');
 
 //faye server vars
 var bayeux = new faye.NodeAdapter({
@@ -26,6 +26,7 @@ var server = http.createServer(app);
 bayeux.attach(server);
 
 // all environments
+app.use(express.favicon('favicon.ico'));
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -62,7 +63,7 @@ app.post('/insertvotes', routes.insertvotes(db));
 app.post('/setcompanyuser', routes.setcompanyuser(db));
 app.post('/resetcompanyuser', routes.resetcompanyuser);
 
-server.listen(3000);
+server.listen(process.env.PORT || 3000);
 console.log("Server up and listening on port 3000")
 
 

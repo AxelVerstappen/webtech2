@@ -8,7 +8,7 @@ block content
    span= title
   
   div#messages
-   
+   ul
   body
     
   script.
@@ -18,11 +18,11 @@ block content
     });
 
     client.subscribe('/channel2', function(message){
-     $('#messages').append('<h2 class="companyName">'+ message.header +'</h2>');
+     $('#messages ul').append('<li class="votes"><h2 class="companyName">'+ message.header +'</h2></li>');
     });
 
     client.subscribe('/channel', function(message) {
-     $('#messages').append('<p class="likedbyCompany">' + message.text + '</p>');
+     $('.votes').last().append('<p class="likedbyCompany">' + message.text + '</p>');
     });
     
    });

@@ -3,7 +3,7 @@ extends layout
 block content
     div#logo
      a(href="/")
-     img(src="/images/logo.svg", alt="logo")
+      img(src="/images/logo.svg", alt="logo")
     - function isEmptyObject(obj) {
     -      var name;
     -      for (name in obj) {
@@ -13,6 +13,9 @@ block content
     -    }
     h1#title
      span= title
+    - if (message)
+      ul
+       li.feedback= message
     - if (isEmptyObject(errors) == false)
         ul  
           - each error in errors

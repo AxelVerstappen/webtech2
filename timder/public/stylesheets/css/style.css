@@ -18,6 +18,8 @@ body {
     margin-left: auto;
     margin-right: auto;
     line-height: 2.5em; }
+    body #startForm .inputField {
+      width: 221px; }
   body .button {
     padding: 15px 25px;
     background-color: #e93f3c;
@@ -107,9 +109,10 @@ body {
       width: 45%;
       min-width: 200px;
       background-color: rgba(249, 244, 56, 0.9);
-      padding: 1em 0; }
+      padding: 1em 0;
+      margin-bottom: 1em; }
       body #adminContent .adminContentList h2 {
-        font-size: 1.2em;
+        font-size: 1.8em;
         font-weight: bold; }
       body #adminContent .adminContentList .singlePost {
         display: block;
@@ -124,6 +127,8 @@ body {
           body #adminContent .adminContentList .singlePost label .buttonSmall {
             vertical-align: middle;
             margin-left: 1em; }
+  body #formAddUser {
+    margin-bottom: 1em; }
   body #accountWork {
     min-width: 860px; }
   body .adduserDiv {
@@ -149,19 +154,22 @@ body {
   body .error {
     color: #e93f3c;
     margin-bottom: 0.7em; }
+  body .feedback {
+    color: #00b20d;
+    margin-bottom: 0.7em; }
   body #messages {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-    background-color: rgba(249, 244, 56, 0.9);
-    padding-bottom: 1em;
-    padding-top: 0.3em; }
-    body #messages h2 {
-      margin-top: 0.5em;
-      font-size: 1.8em;
-      font-weight: bold; }
-    body #messages p {
-      font-size: 1.5em; }
+    background-color: rgba(249, 244, 56, 0.9); }
+    body #messages li {
+      padding-bottom: 1em;
+      padding-top: 1em; }
+      body #messages li h2 {
+        font-size: 1.8em;
+        font-weight: bold; }
+      body #messages li p {
+        font-size: 1.5em; }
 
 nav {
   width: 100%;

@@ -68,6 +68,11 @@ body
         min-width: 250px;
         @include center-div;
         line-height: 2.5em;
+        
+        .inputField
+        {
+            width: 221px;
+        }
     }
     
     .button 
@@ -195,10 +200,11 @@ body
             min-width: 200px;
             background-color: $overlay-color;
             padding: 1em 0;
+            margin-bottom: 1em;
             
             h2
             {
-                font-size: $font-size;
+                font-size: 1.8em;
                 font-weight: bold;
             }
             
@@ -222,6 +228,10 @@ body
             }
         }
     }
+    #formAddUser
+    {
+        margin-bottom: 1em;    
+    }
     
     #accountWork
     {
@@ -232,7 +242,6 @@ body
     {
         background-color: $overlay-color;
         width: 50%;
-        //min-width: 850px;
         @include center-div;
         padding: 1em 0em;
         
@@ -267,24 +276,33 @@ body
         margin-bottom: 0.7em;
     }
     
+    .feedback
+    {
+        color: #00b20d;
+        margin-bottom: 0.7em;
+    }
+    
     #messages
     {
         @include center-div;
         width: 50%;
         background-color: $overlay-color;
-        padding-bottom: 1em;
-        padding-top: 0.3em;
         
-        h2
+        li
         {
-            margin-top: 0.5em;
-            font-size: 1.8em;
-            font-weight: bold;
-        }
-        
-        p
-        {
-            font-size: 1.5em;
+            padding-bottom: 1em;
+            padding-top: 1em;
+            
+            h2
+            {
+                font-size: 1.8em;
+                font-weight: bold;
+            }
+
+            p
+            {
+                font-size: 1.5em;
+            }
         }
     }
     

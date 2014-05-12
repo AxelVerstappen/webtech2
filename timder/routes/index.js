@@ -129,10 +129,10 @@ exports.adduser = function(db) {
                     res.send("There was a problem adding the information to the database.");
                 }
                 else {
-                    // Header url naar /userlist aanpassen als het succesvol is.
-                    res.location("newuser");
-                    // En naar de succes pagina sturen.
-                    res.redirect("newuser");
+                    res.render('newuser', { 
+                        title: 'IMD held toevoegen',
+                        message: 'IMD held toegevoegd'
+                    });
                 }
             });
         }

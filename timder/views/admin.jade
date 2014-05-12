@@ -8,7 +8,7 @@ block content
     span= title
   div#adminContent  
       ul#users.adminContentList
-       h2= 'GEBRUIKERS'
+       h2= 'Gebruikers'
        each user, i in userlist
              li.singlePost
                 label 
@@ -17,19 +17,12 @@ block content
                  input(class="removeUserBtn buttonSmall", type="button", value="Verwijder")
 
       ul#votelist.adminContentList
-       h2= 'VORIGE SELECTIES'
+       h2= 'Vorige selecties'
        each company, i in companylist
         li.singlePost
              label
               p.voteid(style="display: none")= company._id
               = company.companyname
-              //br
-              //if company.votes != 0
-               -for (var t=0; t < company.votes.length; t++)
-                p= company.votes[t].votedname
-                //br
-              //else
-               p='Geen match gevonden :-('
               input(class="removeVoteBtn buttonSmall", type="button", value="Verwijder")
        form#formCleardb(name="cleardb",method="post",action="/cleardb")
         input(type="submit", class="button", value="Alle resultaten verwijderen")
