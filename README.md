@@ -80,7 +80,7 @@ Transforming an element means to physically change the look of an element, like 
 
 Transformations are often used together with a transition to add a certain duration for the transformation.
 
-#### 2D Transforms
+### 2D Transforms
 * translate()
 The translate method can make elements move over the screen without messing with your layout of the other elements. *translateX* moves an element from left to right or from right to left, while *translateY* moves the elements from top to bottom or vice versa.
 
@@ -98,7 +98,7 @@ The matrix method combines all of the 2D transform methods into one.
 
 The matrix method take six parameters, containing mathematic functions, which allows you to: rotate, scale, move (translate), and skew elements.
 
-#### 3D Transforms
+### 3D Transforms
 * rotateX
 With the rotateX method, the element rotates around its X-axis at a given degree.
 
@@ -115,6 +115,14 @@ The perspective method sets the angle of the view on an element.
 In a way, animations and transitions are the same, they can both change the appearance of an element but there are some differences between them: 
 * An animation consists of keyframes which divide the duration of the animation into %'s, while a transition executes the order in even steps over the given time.
 * An animation can start whenever you want it to and keep on looping, but a transition has to be triggered by something (i.e. a button click).
+
+### Assignment (Opdracht1 & Opdracht2)
+
+* Opdracht 1
+In this assignment, I started out with 3 colored balloons floating on top of eachother. When the stack was being clicked, it automatically assigned different classes to each balloon using JQuery. When the class is set, the balloons execute a specified animation for each class.
+
+* Opdracht 2
+In this exercise, I made an interface that's full of animations, most of them onload. For example: the header flips in and after it has, the header text appears sliding in from the left.
 
 ## Realtime apps with node.js and socket.io
 
