@@ -2,6 +2,12 @@
 In this document you will find notes on what I have learned during my webdevelopment courses this year. 
 In general I will write down the basics of each subject I have learned and then document on how each assignment works.
 
+## Navigation
+[Working with Git](## Working with Git)
+[Advanced Javascript](## Advanced Javascript)
+[Animating with CSS](## Animating with CSS)
+[Realtime apps with node.js and socket.io](## Realtime apps with node.js and socket.io)
+
 ## Working with Git
 ### What is git?
 Git is a version control system or VCS. Another famous version control system is SVN or Subversion. A version control system makes it easier to collaborate on projects in teams, especially when a project consists of source code like PHP, HTML, .. 
@@ -100,16 +106,16 @@ var weather = localstorage.getItem("weather");
 
 ### Assignment (Opdracht3, Opdracht4 & Opdracht5)
 
-* Opdracht 3
+#### Opdracht 3
 
 What I learned during this chapter is how to build your own little 'framework' like JQuery without having to import the JQuery library. In short, I created my own Color and AddClass function by creating prototypes of the Javascript library to make a little To Do List.
 
-* Opdracht 4
+#### Opdracht 4
 
 In this one, I used the newly learned techniques of importing the Forecast API, combining it with the current geolocation and storing it in localstorage. After storing it into localstorage, I used some of the data from the API and read it out in the HTML.
 There wasn't too much time for this assignment so I only completed the functionalities, not the CSS.
 
-* Opdracht 5
+#### Opdracht 5
 
 This assignment had to be done in groups of 2 students so together with Kim Janssens, I made a working weather app. We used the same techniques as in the previous assignment, together with CSS3 animations depending on the temperature etc. We also used some prototype functions but not as much as in the first assignment.
 
@@ -167,11 +173,11 @@ In a way, animations and transitions are the same, they can both change the appe
 
 ### Assignment (Opdracht1 & Opdracht2)
 
-* Opdracht 1
+#### Opdracht 1
 
 In this assignment, I started out with 3 colored balloons floating on top of eachother. When the stack was being clicked, it automatically assigned different classes to each balloon using JQuery. When the class is set, the balloons execute a specified animation for each class.
 
-* Opdracht 2
+#### Opdracht 2
 
 In this exercise, I made an interface that's full of animations, most of them onload. For example: the header flips in and after it has, the header text appears sliding in from the left.
 
@@ -288,7 +294,7 @@ The last important thing is that you don't really have to create a collection be
 
 ### Assignment (Timder)
 
-* Timder
+#### Timder
 
 This was my final project for these lessons, I made a 'Tinder' app for our school in which students can create an account and upload 3 pictures in which they would display their best works so far in Design or Development. 
 The main screen is only seen by companies who would like to quickly browse through the best work of everyone in our school and maybe have a chat with them. The only thing they have to do is enter their name & choose if they only want to see Designers, Developers or both. 
