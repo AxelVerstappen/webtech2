@@ -52,6 +52,9 @@ GitHub is not the only provider of Git hosting, but it's one of the most famous 
 #### pull requests
 *Pull requests* notify users about changes you pushed to a repository. After you initiate a pull request on GitHub, your changes can be reviewed and people can comment on your work. Once approved, the owner of the forked repository can decide to merge your changes into the repository so that anyone can pull in your changes. 
 
+
+
+
 ## Advanced Javascript
 During these lessons we focused on more advanced usage of Javascript, where we would learn to make our own prototype functions and framework and learn to work with the concept of DRY (Don't Repeat Yourself).
 
@@ -59,12 +62,40 @@ During these lessons we focused on more advanced usage of Javascript, where we w
 Prototypes enable us to make our own little 'framework' with Javascript which enable us to create the exact functions we need without having to load the entire JQuery framework into the application (this decreases the loadtime, especially for mobile applications).
 
 ### event handling
+An HTML event can be something the browser does, or something a user does, like: a button being clicked, a page being loaded, etc. When an event happens, we can write Javascript to 'do something' when a certain event is detected.
+
 ### objects
+Almost everything in JavaScript can be an Object: Strings, Functions, Arrays, Dates... Objects are just data, with added properties and methods.
+
 ### inheritance
+Inheritance in Javascript basically means merging two objects into one. It is done with the .prototype function which takes all the properties from another Object so it can use it in the newly created Object.
+
 ### namespacing
+In many programming languages, namespacing is a technique employed to avoid collisions with other objects or variables in the global namespace. They're also extremely useful for helping organize blocks of functionality in your application into easily manageable groups that can be uniquely identified.
+In JavaScript, namespacing at an enterprise level is critical as it's important to safeguard your code from breaking in the event of another script on the page using the same variable or method names as you are.
+
 ### closures
+Closures are functions that refer to independent (free) variables. In other words, the function defined in the closure 'remembers' the environment in which it was created. 
+    `function init() {
+    var name = "Mozilla"; // name is a local variable created by init
+    function displayName() { // displayName() is the inner function, a closure
+        alert (name); // displayName() uses variable declared in the parent function    
+    }
+    displayName();    
+    }
+    init();`
+
 ### module pattern
 ### bower
+
+### Assignment (Opdracht3 & Opdracht4)
+
+* Opdracht 3
+
+In this assignment, I started out with 3 colored balloons floating on top of eachother. When the stack was being clicked, it automatically assigned different classes to each balloon using JQuery. When the class is set, the balloons execute a specified animation for each class.
+
+
+
 
 ## Animating with CSS
 ### Transitions
@@ -80,7 +111,7 @@ Transforming an element means to physically change the look of an element, like 
 
 Transformations are often used together with a transition to add a certain duration for the transformation.
 
-### 2D Transforms
+#### 2D Transforms
 * translate()
 The translate method can make elements move over the screen without messing with your layout of the other elements. *translateX* moves an element from left to right or from right to left, while *translateY* moves the elements from top to bottom or vice versa.
 
@@ -98,7 +129,7 @@ The matrix method combines all of the 2D transform methods into one.
 
 The matrix method take six parameters, containing mathematic functions, which allows you to: rotate, scale, move (translate), and skew elements.
 
-### 3D Transforms
+#### 3D Transforms
 * rotateX
 With the rotateX method, the element rotates around its X-axis at a given degree.
 
@@ -119,10 +150,15 @@ In a way, animations and transitions are the same, they can both change the appe
 ### Assignment (Opdracht1 & Opdracht2)
 
 * Opdracht 1
+
 In this assignment, I started out with 3 colored balloons floating on top of eachother. When the stack was being clicked, it automatically assigned different classes to each balloon using JQuery. When the class is set, the balloons execute a specified animation for each class.
 
 * Opdracht 2
+
 In this exercise, I made an interface that's full of animations, most of them onload. For example: the header flips in and after it has, the header text appears sliding in from the left.
+
+
+
 
 ## Realtime apps with node.js and socket.io
 
