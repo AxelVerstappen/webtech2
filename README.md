@@ -3,12 +3,15 @@ In this document you will find notes on what I have learned during my webdevelop
 In general I will write down the basics of each subject I have learned and then document on how each assignment works.
 
 ## Navigation
-[Working with Git](## Working with Git)
+[Working with Git](#git)
+
 [Advanced Javascript](## Advanced Javascript)
+
 [Animating with CSS](## Animating with CSS)
+
 [Realtime apps with node.js and socket.io](## Realtime apps with node.js and socket.io)
 
-## Working with Git
+## Working with Git<a name="git"></a>
 ### What is git?
 Git is a version control system or VCS. Another famous version control system is SVN or Subversion. A version control system makes it easier to collaborate on projects in teams, especially when a project consists of source code like PHP, HTML, .. 
 
