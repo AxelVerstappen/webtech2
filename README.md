@@ -87,15 +87,11 @@ function init() {
 init();
 ```
 
-### module pattern
-### bower
-
 ### Assignment (Opdracht3 & Opdracht4)
 
 * Opdracht 3
 
-In this assignment, I started out with 3 colored balloons floating on top of eachother. When the stack was being clicked, it automatically assigned different classes to each balloon using JQuery. When the class is set, the balloons execute a specified animation for each class.
-
+What I learned during this chapter is how to build your own little 'framework' like JQuery without having to import the JQuery library. In short, I created my own Color and AddClass function by creating prototypes of the Javascript library to make a little To Do List.
 
 
 
