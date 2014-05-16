@@ -11,7 +11,9 @@ In general I will write down the basics of each subject I have learned and then 
 
 [Realtime apps with node.js and socket.io](#nodejs)
 
-## Working with Git<a name="git"></a>
+[SASS](#sass)
+
+## 1. Working with Git<a name="git"></a>
 ### What is git?
 Git is a version control system or VCS. Another famous version control system is SVN or Subversion. A version control system makes it easier to collaborate on projects in teams, especially when a project consists of source code like PHP, HTML, .. 
 
@@ -64,7 +66,7 @@ GitHub is not the only provider of Git hosting, but it's one of the most famous 
 
 
 
-## Advanced Javascript<a name="advancedjs"></a>
+## 2. Advanced Javascript<a name="advancedjs"></a>
 During these lessons we focused on more advanced usage of Javascript, where we would learn to make our own prototype functions and framework and learn to work with the concept of DRY (Don't Repeat Yourself).
 
 ### prototypes
@@ -124,7 +126,7 @@ This assignment had to be done in groups of 2 students so together with Kim Jans
 
 
 
-## Animating with CSS<a name="cssanimations"></a>
+## 3. Animating with CSS<a name="cssanimations"></a>
 ### Transitions
 A transition in CSS3 is an animation between changes. These transitions are often being triggered by the class' pseude-selectors like :hover. 
 
@@ -187,7 +189,7 @@ In this exercise, I made an interface that's full of animations, most of them on
 
 
 
-## Realtime apps with node.js and socket.io<a name="nodejs"></a>
+## 4. Realtime apps with node.js and socket.io<a name="nodejs"></a>
 
 ####what is node.js
 Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
@@ -305,4 +307,97 @@ AFter this, they are redirected to the 'tinder page' where they get to see the i
 The results are posted to a scoreboard page on which all incoming data is displayed realtime.
 
 The app is made with Node.js in the Express framework, working with Jade (template language), Faye (send and receive realtime data from the tinder app to the scoreboard page) and MongoDb (storing users, companies & likes and reading it all in the admin page to remove profiles or companies to prevent database overflowing). The CSS has been done using SASS for easier development & I have also added Gulp into the mix just to test what it does and how it worked.
+
+## 5. SASS<a name="sass"></a>
+
+### What is SASS?
+SASS is a CSS preprocessor like Less and Stylus. A CSS preprocessor comes in handy because you have to write less code, you can use variables (like in Javascript etc), you can use mixins, and it gives you easy, manageable CSS files (unlike the 1287-line code you used to have).
+Also nice to know is that it requires Ruby to install.
+
+What a SASS stylesheets directory looks like:
+```
+/css 
+ style.css 
+/scss 
+ /partials 
+ _nav.scss 
+ _footer.scss 
+ style.scss 
+ _base.scss
+```
+
+#### Compiling SCSS to CSS
+There are several commands to compile SCSS files into one CSS file.
+
+Manually:
+`sass style.scss ../css/style.css`
+
+Automatically:
+`sass --watch style.scss:../css/style.css`
+
+Automatically compressed:
+`sass --watch style.scss:../css/style.css --style compressed`
+
+#### Imports
+Using imports, you can divide all your stylesheets for easier maintenance and still compress them into one afterwards. 
+
+```
+@import 'base'; 
+@import 'partials/nav'; 
+@import 'partials/footer';
+```
+
+#### Variables
+You can use variables like you use them in Javascript or PHP. It is strongly recommended to use them for colors, font-sizes, etc. for when you have to change a website's colors quickly.
+
+```
+$color-primary: #e74c3c; 
+h1 
+{ 
+ color: $color-primary; 
+} 
+!
+a 
+{ 
+ color: lighten($color-primary, 50%); 
+}
+```
+
+#### Nesting
+You can also nest CSS code inside elements like this:
+```
+#container 
+{ 
+ p 
+ { 
+ strong 
+ { 
+ } 
+!
+ em 
+ { 
+ } 
+ } 
+}
+```
+
+
+#### Mixins
+Mixins are super-handy when it comes to more complex CSS, for example CSS that requires vendor preﬁxes like:
+```
+@mixin border-radius($radius) { 
+ -webkit-border-radius: $radius; 
+ -moz-border-radius: $radius; 
+ -ms-border-radius: $radius; 
+ border-radius: $radius; 
+}
+```
+
+Then you could use it in the CSS like this:
+```
+nav 
+{ 
+ @include border-radius(10px); 
+}
+```
 
