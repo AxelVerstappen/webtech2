@@ -76,14 +76,16 @@ In JavaScript, namespacing at an enterprise level is critical as it's important 
 
 ### closures
 Closures are functions that refer to independent (free) variables. In other words, the function defined in the closure 'remembers' the environment in which it was created. 
-    `function init() {
-    var name = "Mozilla"; // name is a local variable created by init
-    function displayName() { // displayName() is the inner function, a closure
-        alert (name); // displayName() uses variable declared in the parent function    
+    ```javascript
+    function init() {
+        var name = "Mozilla"; // name is a local variable created by init
+        function displayName() { // displayName() is the inner function, a closure
+            alert (name); // displayName() uses variable declared in the parent function    
+        }
+        displayName();    
     }
-    displayName();    
-    }
-    init();`
+    init();
+    ```
 
 ### module pattern
 ### bower
