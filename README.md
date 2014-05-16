@@ -3,15 +3,15 @@ In this document you will find notes on what I have learned during my webdevelop
 In general I will write down the basics of each subject I have learned and then document on how each assignment works.
 
 ## Navigation
-[Working with Git](#git)
+[1. Working with Git](#git)
 
-[Advanced Javascript](#advancedjs)
+[2. Advanced Javascript](#advancedjs)
 
-[Animating with CSS](#cssanimations)
+[3. Animating with CSS](#cssanimations)
 
-[Realtime apps with node.js and socket.io](#nodejs)
+[4. Realtime apps with node.js and socket.io](#nodejs)
 
-[SASS](#sass)
+[5. SASS](#sass)
 
 ## 1. Working with Git<a name="git"></a>
 ### What is git?
