@@ -87,11 +87,31 @@ function init() {
 init();
 ```
 
-### Assignment (Opdracht3 & Opdracht4)
+### geolocation
+Browsers can get the current location of a user with one line of Javascript.
+`navigator.geolocation.getCurrentPosition(success, error);`
+
+### localstorage
+Localstorage allows us to save data locally, cookies also work but can contain much less data and are transmitted to the server with every request, we don’t want that overhead. It's perfect for e.g. caching API calls! Localstorage is client-side only and can store up to 5MB at a time.
+```
+localstorage.setItem("weather", response); 
+var weather = localstorage.getItem("weather"); 
+```
+
+### Assignment (Opdracht3, Opdracht4 & Opdracht5)
 
 * Opdracht 3
 
 What I learned during this chapter is how to build your own little 'framework' like JQuery without having to import the JQuery library. In short, I created my own Color and AddClass function by creating prototypes of the Javascript library to make a little To Do List.
+
+* Opdracht 4
+
+In this one, I used the newly learned techniques of importing the Forecast API, combining it with the current geolocation and storing it in localstorage. After storing it into localstorage, I used some of the data from the API and read it out in the HTML.
+There wasn't too much time for this assignment so I only completed the functionalities, not the CSS.
+
+* Opdracht 5
+
+This assignment had to be done in groups of 2 students so together with Kim Janssens, I made a working weather app. We used the same techniques as in the previous assignment, together with CSS3 animations depending on the temperature etc. We also used some prototype functions but not as much as in the first assignment.
 
 
 
@@ -228,29 +248,46 @@ Faye is a type of websocket and it is used to easily create an application to pu
 ####subscribing to and publishing events with Faye
 Now that we have Faye running on the connection we already established, we can publish and subscribe to messages from within the application. 
 * First you'll have to open up the layout.jade file and add the latest JQuery file and Faye file links to your head (the Faye map and files will be created at runtime so you don't have to worry about them)
-   
-	`script(src="http://code.jquery.com/jquery-latest.min.js")`
-	
-	`script(src="/faye/browser/faye-browser.js")`
-	
-	`script(src="/faye/client.js")`
+
+```
+script(src="http://code.jquery.com/jquery-latest.min.js")
+script(src="/faye/browser/faye-browser.js")
+script(src="/faye/client.js")
+```
    
 * Next, you can start out by creating a Faye client in any jade file you desire by adding this code. 
 
-	`var client = new Faye.Client("http://localhost:8000/");`
+`var client = new Faye.Client("http://localhost:8000/");`
 
 * After this, you can subscribe to a channel to get messages published to a certain path (in this case the path name is /messages)
 
-	```client.subscribe("/messages", function(message) {
+```
+client.subscribe("/messages", function(message) {
     	alert("Got a message: " + message.text);
-   	});```
+});
+```
    
 * As a last step, you still have to publish messages to that given path and we do this by publishing something, for example:
 
-	```client.publish("/messages", {
-		text: "Hello world"
-	});```
+```
+client.publish("/messages", {
+	text: "Hello world"
+});
+```
    
 ####nodemon
 Nodemon is a utility that will look for any changes in the source code of your application and will refresh the app whenever something changes. You can also restart your application yourself by just typing `rs` in the command prompt.
 You can install nodemon by using the command: `npm install -g nodemon`
+
+### A little more advanced
+
+#### using MongoDB
+I learned about MongoDB all by myself, at home. Firstly you obviously have to install the dependencies for it (I chose to work with Monk instead of the popular Mongoose because the guides I used all used Monk). The first thing that's important to know about MongoDB is that you don't have a visualisation of your own database like in SQL unless you install a program like Robomongo.
+Second, there is no such thing as a relationhip between tables (called collections), there are embedded documents.
+The last important thing is that you don't really have to create a collection before being able to store something in it. MongoDB dynamiccaly creates collections of the moment something is stored in one through scripts. It also consists entirely out of JSON so you can read the data like you would read data from an API.
+
+### Assignment (Timder)
+
+* Timder
+
+
