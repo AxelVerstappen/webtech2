@@ -290,4 +290,10 @@ The last important thing is that you don't really have to create a collection be
 
 * Timder
 
+This was my final project for these lessons, I made a 'Tinder' app for our school in which students can create an account and upload 3 pictures in which they would display their best works so far in Design or Development. 
+The main screen is only seen by companies who would like to quickly browse through the best work of everyone in our school and maybe have a chat with them. The only thing they have to do is enter their name & choose if they only want to see Designers, Developers or both. 
+AFter this, they are redirected to the 'tinder page' where they get to see the images and have to swipe using a [Leapmotion device](https://www.leapmotion.com/). Swiping left means disliking and swiping right means liking a profile.
+The results are posted to a scoreboard page on which all incoming data is displayed realtime.
+
+The app is made with Node.js in the Express framework, working with Jade (template language), Faye (send and receive realtime data from the tinder app to the scoreboard page) and MongoDb (storing users, companies & likes and reading it all in the admin page to remove profiles or companies to prevent database overflowing). The CSS has been done using SASS for easier development & I have also added Gulp into the mix just to test what it does and how it worked.
 
