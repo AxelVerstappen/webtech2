@@ -5,11 +5,11 @@ In general I will write down the basics of each subject I have learned and then 
 ## Navigation
 [Working with Git](#git)
 
-[Advanced Javascript](## Advanced Javascript)
+[Advanced Javascript](#advancedjs)
 
-[Animating with CSS](## Animating with CSS)
+[Animating with CSS](#cssanimations)
 
-[Realtime apps with node.js and socket.io](## Realtime apps with node.js and socket.io)
+[Realtime apps with node.js and socket.io](#nodejs)
 
 ## Working with Git<a name="git"></a>
 ### What is git?
@@ -64,7 +64,7 @@ GitHub is not the only provider of Git hosting, but it's one of the most famous 
 
 
 
-## Advanced Javascript
+## Advanced Javascript<a name="advancedjs"></a>
 During these lessons we focused on more advanced usage of Javascript, where we would learn to make our own prototype functions and framework and learn to work with the concept of DRY (Don't Repeat Yourself).
 
 ### prototypes
@@ -124,7 +124,7 @@ This assignment had to be done in groups of 2 students so together with Kim Jans
 
 
 
-## Animating with CSS
+## Animating with CSS<a name="cssanimations"></a>
 ### Transitions
 A transition in CSS3 is an animation between changes. These transitions are often being triggered by the class' pseude-selectors like :hover. 
 
@@ -187,7 +187,7 @@ In this exercise, I made an interface that's full of animations, most of them on
 
 
 
-## Realtime apps with node.js and socket.io
+## Realtime apps with node.js and socket.io<a name="nodejs"></a>
 
 ####what is node.js
 Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
